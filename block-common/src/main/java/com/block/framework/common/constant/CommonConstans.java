@@ -23,5 +23,10 @@ public class CommonConstans {
 	 * 请求错误信息
 	 */
 	public static final String DEFAULT_ERROR_MSG = "系统异常!";
+	
+	/**
+	 * 令牌名称
+	 */
+	public static final String TOKEN="token";
 }
 

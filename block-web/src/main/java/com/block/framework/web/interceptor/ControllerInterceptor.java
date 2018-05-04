@@ -16,8 +16,7 @@ import com.block.framework.common.annotation.ActionDescription;
 import com.block.framework.common.exception.BlockException;
 
 /**
- * controller层获取用户的session信息 ,并把session中数据库信息设置到BaseModel中。
- * @author lilixc
+ * @author devil
  */
 @Aspect
 @Component

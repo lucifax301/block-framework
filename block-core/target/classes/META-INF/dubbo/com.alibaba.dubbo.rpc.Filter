@@ -1,1 +1,1 @@
-requestContext=cn.com.liliyun.common.filter.RequestContextFilter
+requestContext=com.block.framework.core.dubbofilter.RequestContextFilter

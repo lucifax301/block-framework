@@ -21,7 +21,7 @@ import com.block.framework.core.constant.CoreConstants;
 import com.block.framework.core.context.RequestContext;
 
 /*
- * 权限拦截器
+ * mvc 权限拦截器
  */
 public class PrivilageInterceptorAdapter extends HandlerInterceptorAdapter {
 

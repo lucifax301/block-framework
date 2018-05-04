@@ -9,8 +9,8 @@ import com.alibaba.dubbo.rpc.Result;
 import com.alibaba.dubbo.rpc.RpcContext;
 import com.alibaba.dubbo.rpc.RpcException;
 import com.alibaba.dubbo.rpc.RpcInvocation;
-import com.block.framework.core.context.BlockInvokeContext;
 import com.block.framework.core.context.RequestContext;
+import com.block.framework.core.dubbo.BlockInvokeContext;
 
 
 /**

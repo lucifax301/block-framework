@@ -314,5 +314,7 @@
   	<module>block-log</module>
   	<module>block-mq</module>
   	<module>block-admin</module>
+  	<module>block-dubbo</module>
+  	<module>block-eventdriver</module>
   </modules>
 </project>

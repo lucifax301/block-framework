@@ -8,7 +8,7 @@ import java.util.Map;
 
 import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.common.URL;
-import com.block.framework.core.context.BlockInvokeContext;
+import com.block.framework.core.dubbo.BlockInvokeContext;
 
 
 /**
