@@ -180,7 +180,5 @@ public class RedisUtilCluster
 		byte[] byteKey=keySerializer.serialize(key);
     	return binaryJedisCluster.exists(byteKey);
 	}
-	public void expire(Set<String> keys,int seconds){
-		
-	}
+	
 }

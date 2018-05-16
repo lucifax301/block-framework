@@ -26,25 +26,25 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
         <property name="ignoreUnresolvablePlaceholders" value="true" />   
         <property name="locations" ref="redissonResources" />  
     </bean>
-   <bean id="redissonSentinelConfig" class="org.redisson.SentinelServersConfig">
-        <property name="masterName" value="mymaster" />
-        <property name="password" value="${redis.password}" /> 
+   <bean id="redissonConfig" class="org.redisson.Config">
     </bean>
-    <bean id="sentineConfig.init" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-	    <property name="targetObject" ref="redissonSentinelConfig" />
-	    <property name="targetMethod" value="addSentinelAddress" />
+    
+    <bean id="redissonSingleConfig" class="org.redisson.SingleServerConfig">
+    </bean>
+    
+    <bean id="singleConfig.init" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+	    <property name="targetObject" ref="redissonSingleConfig" />
+	    <property name="targetMethod" value="setAddress" />
 	    <property name="arguments">
-	            <!-- <value>115.159.79.223:26379</value> -->
-	            <value>${redis.sentinal.ip}</value>
+	            <value>${redis.ip}</value>
 	    </property>
 	</bean>
-    <bean id="redissonConfig" class="org.redisson.Config">
-    </bean>  	
-   	<bean id="redissonConfig.init" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+	<bean id="redissonConfig.init" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
 	    <property name="targetObject" ref="redissonConfig" />
-	    <property name="targetMethod" value="useSentinelServers" />
-	    <property name="arguments" ref="redissonSentinelConfig"></property>
+	    <property name="targetMethod" value="useSingleServer" />
+	    <property name="arguments" ref="redissonSingleConfig"></property>
 	</bean>
+	
 	<bean id="redissonClient" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
 	    <property name="targetClass" value="org.redisson.Redisson" />
 	    <property name="targetMethod" value="create" />
