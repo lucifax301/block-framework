@@ -15,7 +15,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 	<bean id="redisResources" class="java.util.ArrayList">  
         <constructor-arg>  
         <list>  
-            <value>classpath*:jedis.properties</value>  
+            <value>classpath*:sentinal.properties</value>  
         </list>  
         </constructor-arg>  
     </bean>  
