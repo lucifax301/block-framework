@@ -318,5 +318,6 @@
   	<module>block-eventdriver</module>
   	<module>block-config</module>
   	<module>block-metric</module>
+  	<module>wxpay</module>
   </modules>
 </project>
