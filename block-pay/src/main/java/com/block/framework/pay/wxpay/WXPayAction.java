@@ -1,4 +1,4 @@
-package com.block.framework.pay.alipay.util;
+package com.block.framework.pay.wxpay;
 
 import java.util.Date;
 import java.util.HashMap;
