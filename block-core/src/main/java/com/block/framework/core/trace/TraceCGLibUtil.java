@@ -9,10 +9,10 @@ import org.springframework.cglib.proxy.Enhancer;
  */
 public class TraceCGLibUtil {
 
-	public static <T> T createBean(Class<T> cls){
+	public static <T> T createBean(Class<T> cls,Object obj){
 		Enhancer enhancer = new Enhancer();
 		enhancer.setSuperclass(cls);
-		enhancer.setCallback(new TraceMethodWrapper());
+		enhancer.setCallback(new TraceMethodWrapper(obj));
 		return (T)enhancer.create();
 	}
 }

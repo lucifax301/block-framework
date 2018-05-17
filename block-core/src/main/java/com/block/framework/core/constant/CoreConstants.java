@@ -7,4 +7,6 @@ public class CoreConstants {
 	public static final String ROUTE_DB = "DB_ROUTE";
 	
 	public static final String MRG = "MGR";
+	
+	
 }

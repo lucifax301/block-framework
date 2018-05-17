@@ -316,5 +316,7 @@
   	<module>block-admin</module>
   	<module>block-dubbo</module>
   	<module>block-eventdriver</module>
+  	<module>block-config</module>
+  	<module>block-metric</module>
   </modules>
 </project>

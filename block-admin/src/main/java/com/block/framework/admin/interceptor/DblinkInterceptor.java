@@ -37,7 +37,7 @@ public class DblinkInterceptor {
 	}
 
 	@Before("controllerAspect()")
-	public void injectDbInfo(JoinPoint joinPoint) {
+	public void before(JoinPoint joinPoint) {
 		System.out.println("dblink已经记录下操作日志@Before 方法执行前");
 		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 		HttpSession session = request.getSession();

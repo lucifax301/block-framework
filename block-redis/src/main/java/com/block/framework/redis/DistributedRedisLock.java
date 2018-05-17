@@ -11,6 +11,8 @@ public class DistributedRedisLock {
 	@Autowired
 	private RedissonClient redissonClient;
 	
+	
+	
 	/**
 	 * 
 	 * @param lockName
@@ -45,12 +47,16 @@ public class DistributedRedisLock {
         return  true;  
     }  
   
-	public void release(RLock lock){  
-		lock.unlock();  
-    }  
-	
-    public void release(String lockName){  
+	public void release(String lockName){  
         RLock lock = redissonClient.getLock(lockName);  
         lock.unlock();  
+    }  
+    
+    public RLock getLock(String lockName){
+		return redissonClient.getLock(lockName);  
+	}
+    
+    public void release(RLock lock){
+    	if(lock!=null) lock.unlock();  
     }  
 }

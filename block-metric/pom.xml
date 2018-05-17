@@ -5,10 +5,15 @@
     <artifactId>block-framework</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>block-log</artifactId>
-  
+  <artifactId>block-metric</artifactId>
   <dependencies>
-		<dependency>
+  <dependency>
+    <groupId>com.codahale.metrics</groupId>
+    <artifactId>metrics-core</artifactId>
+    <version>3.0.2</version>
+	</dependency>
+	
+	<dependency>
 			<groupId>com.block</groupId>
 			<artifactId>block-common</artifactId>
 			<version>${project.version}</version>
@@ -16,10 +21,9 @@
 		</dependency>
 		
 		<dependency>
-			<groupId>com.block</groupId>
-			<artifactId>block-metric</artifactId>
-			<version>${project.version}</version>
-			<type>jar</type>
-		</dependency>
-	</dependencies>	
+		    <groupId>com.codahale.metrics</groupId>
+		    <artifactId>metrics-jvm</artifactId>
+		    <version>3.0.2</version>
+		</dependency>	
+	</dependencies>
 </project>

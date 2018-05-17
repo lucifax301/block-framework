@@ -16,7 +16,7 @@ import com.block.framework.eventdriver.annotation.EventProcessor;
 
 	这种情况下，就会造成onApplicationEvent方法被执行两次。为了避免上面提到的问题，我们可以只在root application context初始化完成后调用逻辑代码，其他的容器的初始化完成，则不做任何处理
  * @author devil
- * 
+ * @deprecated
  */
 public class InstantiationServiceBeanPostProcessor implements
 		ApplicationListener<ContextRefreshedEvent> {

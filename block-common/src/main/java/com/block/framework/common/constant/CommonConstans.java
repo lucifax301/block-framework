@@ -28,5 +28,7 @@ public class CommonConstans {
 	 * 令牌名称
 	 */
 	public static final String TOKEN="token";
+	
+	public static final String REQUEST_INFO = "request_info";
 }
 

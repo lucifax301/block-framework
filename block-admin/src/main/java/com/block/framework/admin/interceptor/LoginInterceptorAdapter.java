@@ -23,7 +23,7 @@ import com.block.framework.core.context.RequestContext;
 /*
  * mvc 权限拦截器
  */
-public class PrivilageInterceptorAdapter extends HandlerInterceptorAdapter {
+public class LoginInterceptorAdapter extends HandlerInterceptorAdapter {
 
 	protected final Logger access = Logger.getLogger(this.getClass());
 	

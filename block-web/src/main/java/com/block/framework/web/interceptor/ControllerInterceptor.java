@@ -17,23 +17,24 @@ import com.block.framework.common.exception.BlockException;
 
 /**
  * @author devil
+ * 去除注解，不让自动扫包加载
  */
-@Aspect
-@Component
+//@Aspect
+//@Component
 public class ControllerInterceptor {
 
 	//对spring的mapping注解做aop拦截
-	@Pointcut("@annotation(org.springframework.web.bind.annotation.RequestMapping)")
+	//@Pointcut("@annotation(org.springframework.web.bind.annotation.RequestMapping)")
 	public void controllerAspect() {
 	}
 
-	@Before("controllerAspect()")
-	public void injectDbInfo(JoinPoint joinPoint) {
+	//@Before("controllerAspect()")
+	public void before(JoinPoint joinPoint) {
 		System.out.println("controllerAspect 已经记录下操作日志@Before 方法执行前");
 		
 	}
 	
-	@Around("controllerAspect()")
+	//@Around("controllerAspect()")
     public Object around(ProceedingJoinPoint pjp) throws Throwable{
 		System.out.println("controllerAspect 已经记录下操作日志@Around 方法执行前");
 		 MethodSignature methodSignature = (MethodSignature)pjp.getSignature();
@@ -52,7 +53,7 @@ public class ControllerInterceptor {
         
     }
 
-    @After("controllerAspect()")
+    //@After("controllerAspect()")
     public void after() {
         System.out.println("controllerAspect 已经记录下操作日志@After 方法执行后");
     }

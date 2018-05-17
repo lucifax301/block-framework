@@ -18,17 +18,18 @@ import com.block.framework.core.trace.Trace;
  * 
  * @author devil
  * 对所有Service注解的类的方法拦截，但是 不能嵌套拦截
+ * 去除注解，避免自动扫包加载
  */
-@Aspect
-@Component
+//@Aspect
+//@Component
 public class ServiceInterceptor {
 
 	//拦截所有Servie注解的类的方法
-	@Pointcut("@within(org.springframework.stereotype.Service)")
+	//@Pointcut("@within(org.springframework.stereotype.Service)")
 	public void serviceAspect() {
 	}
 
-	@Before("serviceAspect()")
+	//@Before("serviceAspect()")
 	public void beforeMethod(JoinPoint joinPoint) {
 		MethodSignature methodSignature = (MethodSignature)joinPoint.getSignature();
 		Method method = methodSignature.getMethod();
@@ -56,7 +57,7 @@ public class ServiceInterceptor {
 //        
 //    }
 
-    @After("serviceAspect()")
+    //@After("serviceAspect()")
     public void afterMethod(JoinPoint joinPoint) {
     	MethodSignature methodSignature = (MethodSignature)joinPoint.getSignature();
 		Method method = methodSignature.getMethod();

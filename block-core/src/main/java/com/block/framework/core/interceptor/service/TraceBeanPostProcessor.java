@@ -5,12 +5,13 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 
 import com.block.framework.common.annotation.ActionTrace;
+import com.block.framework.common.util.ProxyObjectUtil;
 import com.block.framework.core.trace.TraceCGLibUtil;
 
 /**
  * 每个bean 实例化完属性注入完后修改bean,用cglib改写bean,加入拦截方法
- * @author Administrator
- *
+ * @author devil
+ * @deprecated
  */
 public class TraceBeanPostProcessor implements BeanPostProcessor {
 
@@ -30,6 +31,14 @@ public class TraceBeanPostProcessor implements BeanPostProcessor {
 		if(isProxy){
 			Class<?> proxyedCls = bean.getClass().getSuperclass();
 			System.out.println("#################post bean:"+ proxyedCls);
+			Object targetObject = null;
+			try {
+				targetObject = ProxyObjectUtil.getTarget(bean);
+				System.out.println(targetObject);
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+			
 			ActionTrace service = (ActionTrace) proxyedCls.getAnnotation(ActionTrace.class);
 			if(service!=null){
 				
@@ -40,7 +49,7 @@ public class TraceBeanPostProcessor implements BeanPostProcessor {
 				 * 正常循环依赖，而没有再次创建****ServiceCGLib$$*** 的情况下 bean和exposedObject都是原始被代理的实体
 				 * 但这里封装后exposedObject 是****ServiceCGLib$$***
 				 */
-				Object newbean = TraceCGLibUtil.createBean(proxyedCls);
+				Object newbean = TraceCGLibUtil.createBean(proxyedCls,targetObject);
 				return newbean;
 				
 			}
@@ -57,7 +66,7 @@ public class TraceBeanPostProcessor implements BeanPostProcessor {
 				 * 正常循环依赖，而没有再次创建****ServiceCGLib$$*** 的情况下 bean和exposedObject都是原始被代理的实体
 				 * 但这里封装后exposedObject 是****ServiceCGLib$$***
 				 */
-				Object newbean = TraceCGLibUtil.createBean(cls);
+				Object newbean = TraceCGLibUtil.createBean(cls,bean);
 				return newbean;
 				
 			}
