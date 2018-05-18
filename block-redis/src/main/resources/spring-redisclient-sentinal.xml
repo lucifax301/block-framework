@@ -16,6 +16,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 	<import resource="classpath*:spring-redisson-sentinal.xml"/>
 	<bean id="RedisClient" class="com.block.framework.redis.CommonRedisClient" >
 	</bean>	 
-	
+	<bean id="redisLock" class="com.block.framework.redis.DistributedRedisLock" >
+	</bean>	
 	
 </beans>

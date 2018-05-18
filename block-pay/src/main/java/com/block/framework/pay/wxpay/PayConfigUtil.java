@@ -12,4 +12,8 @@ public class PayConfigUtil {
 	
 	//下载订单
 	public static String orderQuery_url = "https://api.mch.weixin.qq.com/pay/downloadbill";
+	
+	private static void init(){
+		
+	}
 }

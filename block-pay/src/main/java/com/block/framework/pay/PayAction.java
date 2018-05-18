@@ -8,12 +8,14 @@ public abstract class PayAction {
      * @param reqResult
      * @throws Exception
      */
-    public abstract void doPayAction(PayVo payVo, ReqResult reqResult) throws Exception;
+    public abstract void doPayAction(PayVo payVo, PayReqResult reqResult) throws Exception;
 
     /**
      * 当付款结束时,进行回调处理
      * @param callbackParam
      * @return
      */
-    public abstract ReqResult payCallBack(Object ... callbackParam);
+    public abstract PayReqResult payCallBack(Object ... callbackParam);
+    
+    public abstract IPayPurpose getPayPurposeHandler(PurposeType purposeType);
 }

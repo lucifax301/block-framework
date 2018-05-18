@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+import com.block.framework.pay.util.HttpUtil;
+
 
 //微信扫码支付
 public class Weixin_pay {

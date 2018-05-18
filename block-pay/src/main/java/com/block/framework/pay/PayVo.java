@@ -1,5 +1,7 @@
 package com.block.framework.pay;
 
+import java.util.Map;
+
 public class PayVo {
 
 	private static final long serialVersionUID = -4118061263751669421L;
@@ -15,16 +17,20 @@ public class PayVo {
     //支付内部订单id
     private String payOrderId;
     //支付目的
-    private int payPurpose;
+    private PurposeType payPurpose;
     //优惠券ID
     private long couponId;
     //已经优惠的金额
     private int discountMoney;
     
+    private PayClientVer clientVer;
     //备注信息
     private String remark;
     //平安保险订单id
     private String insuranceId;
+    //存取每种支付的额外信息
+    private Map<String,String> ext;
+    
     /**
      * @param userId
      * @param userType
@@ -34,7 +40,7 @@ public class PayVo {
      * @param payPurpose
      * @param couponId
      */
-    public PayVo(long userId, int userType, int payValue, String payWay, String payOrderId, int payPurpose,
+    public PayVo(long userId, int userType, int payValue, String payWay, String payOrderId, PurposeType payPurpose,
             long couponId, int clientVer, String remark) {
 	   super();
 	   this.userId = userId;
@@ -43,12 +49,12 @@ public class PayVo {
 	   this.payWay = payWay;
 	   this.payOrderId = payOrderId;
 	   this.payPurpose=payPurpose;
-	   
+	   setClientVer(clientVer);
 	   this.couponId = couponId;
 	   this.remark = remark;
     }
     
-    public PayVo(long userId, int userType, int payValue, String payWay, String payOrderId, int payPurpose,
+    public PayVo(long userId, int userType, int payValue, String payWay, String payOrderId, PurposeType payPurpose,
                  long couponId, int clientVer, String remark,String insuranceId) {
         super();
         this.userId = userId;
@@ -57,11 +63,26 @@ public class PayVo {
         this.payWay = payWay;
         this.payOrderId = payOrderId;
         this.payPurpose=payPurpose;
+        setClientVer(clientVer);
         this.couponId = couponId;
         this.remark = remark;
         this.insuranceId=insuranceId;
     }
 
+    /**
+     * @return the clientVer
+     */
+    public PayClientVer getClientVer() {
+        return clientVer;
+    }
+
+    /**
+     * @param clientVer the clientVer to set
+     */
+    public void setClientVer(int clientVer) {
+        this.clientVer = PayClientVer.parse(clientVer);
+    }
+    
     public int getDiscountMoney() {
         return discountMoney;
     }
@@ -180,13 +201,37 @@ public class PayVo {
 		this.insuranceId = insuranceId;
 	}
 
+	
+	
+	public PurposeType getPayPurpose() {
+		return payPurpose;
+	}
+
+	public void setPayPurpose(PurposeType payPurpose) {
+		this.payPurpose = payPurpose;
+	}
+
+	public void setClientVer(PayClientVer clientVer) {
+		this.clientVer = clientVer;
+	}
+	
+	
+
+	public Map<String, String> getExt() {
+		return ext;
+	}
+
+	public void setExt(Map<String, String> ext) {
+		this.ext = ext;
+	}
+
 	/* (non-Javadoc)
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
         return "PayVo [userId=" + userId + ", userType=" + userType + ", payValue=" + payValue + ", payWay=" + payWay
-                + ", payOrderId=" + payOrderId + ", payPurpose=" + payPurpose + ", couponId=" + couponId
+                + ", payOrderId=" + payOrderId + ", payPurpose=" + payPurpose+", clientVer=" + clientVer + ", couponId=" + couponId
                 +  ", remark=" + remark + ", insuranceId=" + insuranceId + "]";
     }
 }

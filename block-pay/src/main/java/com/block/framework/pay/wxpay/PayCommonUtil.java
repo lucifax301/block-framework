@@ -7,6 +7,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.SortedMap;
 
+import com.block.framework.pay.util.MD5Util;
+
 	public class PayCommonUtil {  
 	    public static boolean isTenpaySign(String characterEncoding, SortedMap<Object, Object> packageParams, String API_KEY) {  
 	        StringBuffer sb = new StringBuffer();  

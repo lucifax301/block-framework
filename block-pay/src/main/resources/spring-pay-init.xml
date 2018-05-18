@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+	http://code.alibabatech.com/schema/dubbo 
+	http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	
+	<!--  <context:property-placeholder location="classpath*:*.properties" ignore-unresolvable="true"/>-->
+	<bean id="payResources" class="java.util.ArrayList">  
+        <constructor-arg>  
+        <list>  
+            <value>classpath*:wxpay.properties</value>  
+        </list>  
+        </constructor-arg>  
+    </bean>  
+	
+	<bean id="wxPayConfig" class="com.block.framework.pay.wxpay.config.WXPayConfig">
+        
+        <property name="certLocalPath" value="${wx.pay.certLocalPath}"/>
+        <property name="certPassword" value="${wx.pay.certPassword}"/>
+        <property name="useThreadToDoReport" value="${wx.pay.useThreadToDoReport}"/>
+        <property name="notifyUrl" value="${wx.pay.notifyUrl}"/>
+        <property name="ip" value="${wx.pay.ip}"/>
+        <property name="tradeType" value="${wx.pay.tradeType}"/>
+        <property name="orderExpire" value="${wx.pay.orderExpire}"/>
+        <property name="chargeNotifyUrl" value="${wx.charge.notifyUrl}"/>
+    </bean>
+	
+	<bean id="wxpay" class="com.block.framework.pay.wxpay.WXPayAction"/>
+	
+	<bean id="payFactory" class="com.block.framework.pay.PayFactory">
+		<property name="payGateways">
+            <map>
+                <entry key="wx" value-ref="wxpay" />
+            </map>
+        </property>
+    </bean>
+</beans>

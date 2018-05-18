@@ -9,6 +9,8 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.UUID;
 
+import com.block.framework.pay.util.HttpUtil;
+
 
 public class Orderquery {
 	private static String url = "https://api.mch.weixin.qq.com/pay/downloadbill";

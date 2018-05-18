@@ -1,5 +1,9 @@
 package com.block.framework.common.constant;
 
+import java.util.concurrent.ConcurrentHashMap;
+
+import com.block.framework.common.exception.ConfigException;
+
 public class ResultCode {
 
 	public class RESULTKEY {
@@ -48,4 +52,30 @@ public class ResultCode {
         public static final String MOBILE_NUMBER_ERROR="手机号码错误";
         public static final String MOBILE_NOT_EXIT_ERROR="手机号码不存在";
     }
+    
+    private static ConcurrentHashMap<String,Integer> codeInfo=new ConcurrentHashMap<String,Integer>();
+    private static ConcurrentHashMap<Integer,String> msgInfo=new ConcurrentHashMap<Integer,String>();
+    public static Integer getCode(String name){
+    	return codeInfo.get(name);
+    }
+	public static String getCodeInfo(int code){
+		  return msgInfo.get(code);
+	}
+	
+	/**
+	 * 业务自定义错误全部10000起步
+	 * @param code 必须小于10000
+	 * @param info
+	 */
+	public static void addCodeInfo(String name,int code,String info){
+		if(code>=10000){
+			throw new ConfigException(name+" code can not > 10000");
+		}
+		int key = 10000+code;
+		if(codeInfo.contains(name)){
+			throw new ConfigException(name+" is exist in ResultCode Map");
+		}
+		codeInfo.put(name, key);
+		msgInfo.put(code, info);
+	}
 }

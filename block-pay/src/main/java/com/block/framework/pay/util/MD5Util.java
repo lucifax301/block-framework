@@ -1,4 +1,4 @@
-package com.block.framework.pay.wxpay;
+package com.block.framework.pay.util;
 
 import java.security.MessageDigest;
 

@@ -1,8 +1,13 @@
 package com.block.framework.pay;
 
-public enum PurposeType {
-	DEFAULT(1, "支付费用");
+public class PurposeType {
+	/**
+	 * 业务自定义支付目的类型
+	 */
 	int type;
+	/**
+	 * 业务自定义支付详细信息
+	 */
     String desc;
     
     /**

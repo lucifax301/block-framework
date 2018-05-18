@@ -6,14 +6,22 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.block.framework.common.constant.ResultCode;
 import com.block.framework.common.util.TimeUtil;
+import com.block.framework.pay.IPayPurpose;
 import com.block.framework.pay.PayAction;
+import com.block.framework.pay.PayClientVer;
+import com.block.framework.pay.PayReqResult;
 import com.block.framework.pay.PayVo;
+import com.block.framework.pay.PurposeHandlerFactory;
 import com.block.framework.pay.PurposeType;
+import com.block.framework.pay.util.PayConstants;
 import com.block.framework.pay.wxpay.config.WXPayConfig;
+import com.block.framework.redis.RedisClient;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.tencent.WXPay;
@@ -28,11 +36,18 @@ import com.tencent.protocol.pay_query_protocol.ScanPayQueryResData;
 import com.tencent.protocol.reverse_protocol.ReverseResData;
 import com.tencent.protocol.unified_order_protocol.UnifiedOrderReqData;
 import com.tencent.protocol.unified_order_protocol.UnifiedOrderResData;
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
+import com.thoughtworks.xstream.io.xml.XmlFriendlyNameCoder;
 
 public class WXPayAction extends PayAction {
 
+	private static Logger logger=LoggerFactory.getLogger(WXPayAction.class);
+	
 	@Autowired
     protected WXPayConfig wxPayConfig;
+	@Autowired
+	private RedisClient redisClient;
 	
 	@PostConstruct
     public void initWXConfig()
@@ -44,13 +59,21 @@ public class WXPayAction extends PayAction {
                 wxPayConfig.getTradeType(), wxPayConfig.isUseThreadToDoReport());
     }
 
+	private Object preHandle(PayVo payVo,PayReqResult reqResult) throws Exception{
+		IPayPurpose handler = getPayPurposeHandler(payVo.getPayPurpose());
+		if(handler!=null){
+			return handler.purposeAdvance(payVo, reqResult);
+		}
+		return null;
+	}
+	
     @Override
-    public void doPayAction(final PayVo payVo, final ReqResult reqResult)
+    public void doPayAction(final PayVo payVo, final PayReqResult reqResult)
     {
         try
         {
             // 预处理
-            Object discountAdv = getPayPurpose(payVo.getPayPurpose()).purposeAdvance(payVo, reqResult);
+        	Object discountAdv = preHandle(payVo, reqResult);
             if (discountAdv == null)
             {
                 return;
@@ -58,18 +81,22 @@ public class WXPayAction extends PayAction {
             int discount = (int) discountAdv;
             String payType = "";
             String dev_info = "";
-            if (payVo.getClientVer() == PayClientVer.WEB_WX || payVo.getClientVer() == PayClientVer.WX_COACH) {
+            if (payVo.getClientVer() == PayClientVer.WX_WEB ) {
             	payType = "JSAPI";
             	dev_info = "WEB";
+            }else if (payVo.getClientVer() == PayClientVer.WX_AAPP ) {
+            	payType = "JSAPI";
+            	dev_info = "AAPP";
             }
             else {
             	payType = "APP";
             	dev_info = "APP";
             }
             String openId = "";
-            if (payVo.getClientVer() == PayClientVer.WEB_WX  || payVo.getClientVer() == PayClientVer.WX_COACH )
+            //公众号支付,小程序支付需要openid
+            if (payVo.getClientVer() == PayClientVer.WX_WEB  || payVo.getClientVer() == PayClientVer.WX_AAPP )
             {
-                openId = payVo.getRemark();
+                openId = payVo.getExt().get("openid");
 
                 if (openId == null || openId.isEmpty())
                 {
@@ -115,7 +142,7 @@ public class WXPayAction extends PayAction {
                         @Override
                         public void onFailBySignInvalid(UnifiedOrderResData unifiedOrderResData)
                         {
-                            reqResult.setCode(ResultCode.ERRORCODE.ORDER_PAY_SIGN_INVALID);
+                            reqResult.setCode(ResultCode.getCode("ORDER_PAY_SIGN_INVALID"));
                             reqResult.setMsgInfo(unifiedOrderResData.getErr_code_des());
                             reqResult.setMsgKey(unifiedOrderResData.getErr_code());
                         }
@@ -123,7 +150,7 @@ public class WXPayAction extends PayAction {
                         @Override
                         public void onFailByQuerySignInvalid(ScanPayQueryResData scanPayQueryResData)
                         {
-                            reqResult.setCode(ResultCode.ERRORCODE.ORDER_PAY_SIGN_INVALID);
+                            reqResult.setCode(ResultCode.getCode("ORDER_PAY_SIGN_INVALID"));
                             reqResult.setMsgInfo(scanPayQueryResData.getErr_code_des());
                             reqResult.setMsgKey(scanPayQueryResData.getErr_code());
                         }
@@ -131,7 +158,7 @@ public class WXPayAction extends PayAction {
                         @Override
                         public void onFailByReverseSignInvalid(ReverseResData reverseResData)
                         {
-                            reqResult.setCode(ResultCode.ERRORCODE.ORDER_PAY_SIGN_INVALID);
+                            reqResult.setCode(ResultCode.getCode("ORDER_PAY_SIGN_INVALID"));
                             reqResult.setMsgInfo(reverseResData.getErr_code_des());
                             reqResult.setMsgKey(reverseResData.getErr_code());
                         }
@@ -139,7 +166,7 @@ public class WXPayAction extends PayAction {
                         @Override
                         public void onFailByMoneyNotEnough(UnifiedOrderResData unifiedOrderResData)
                         {
-                            reqResult.setCode(ResultCode.ERRORCODE.ORDER_PAY_MONEY_NOTENOUGH);
+                            reqResult.setCode(ResultCode.getCode("ORDER_PAY_MONEY_NOTENOUGH"));
                             reqResult.setMsgInfo(unifiedOrderResData.getErr_code_des());
                             reqResult.setMsgKey(unifiedOrderResData.getErr_code());
                         }
@@ -166,7 +193,7 @@ public class WXPayAction extends PayAction {
                             reqResult.setData(payInfoVo);
 
                             // 记录一个缓存到redis
-                            redisUtil.set(REDISKEY.PRE_PAY_ORDER + payVo.getPayOrderId(), payVo, 24 * 60 * 60);
+                            redisClient.set(PayConstants.REDISKEY.PRE_PAY_ORDER + payVo.getPayOrderId(), payVo, 24 * 60 * 60);
                         }
 
                         @Override
@@ -178,7 +205,7 @@ public class WXPayAction extends PayAction {
                         @Override
                         public void onFailByOrderClosed(UnifiedOrderResData unifiedOrderResData)
                         {
-                            reqResult.setCode(ResultCode.ERRORCODE.ORDER_CLOSED);
+                            reqResult.setCode(ResultCode.getCode("ORDER_CLOSED"));
                             reqResult.setMsgInfo(unifiedOrderResData.getErr_code_des());
                             reqResult.setMsgKey(unifiedOrderResData.getErr_code());
                         }
@@ -195,30 +222,30 @@ public class WXPayAction extends PayAction {
         catch (Exception e)
         {
             logger.error("WXPAY|payVo:" + payVo, e);
-            emailService.send("【系统】[用户支付异常啦，请抓紧时间处理！！]", "WXPayAction-->doPayAction|"+payVo+"|Exception:"+e);
+            //emailService.send("【系统】[用户支付异常啦，请抓紧时间处理！！]", "WXPayAction-->doPayAction|"+payVo+"|Exception:"+e);
         }
         return;
     }
 
     @Override
-    public ReqResult payCallBack(Object... callbackParam)
+    public PayReqResult payCallBack(Object... callbackParam)
     {
         String result = (String) callbackParam[0];
         PayCallbackResData payCallbackResData = (PayCallbackResData) Util.getObjectFromXML(
                 result, PayCallbackResData.class);
 
-        ReqResult reqResult = new ReqResult();
+        PayReqResult reqResult = new PayReqResult();
         reqResult.setCode(ResultCode.ERRORCODE.FAILED);
         reqResult.setMsgInfo(ResultCode.ERRORINFO.FAILED);
 
         if (payCallbackResData.getReturn_code().equals("SUCCESS"))
         {
             // 判断标记
-            if (redisUtil.isExist(REDISKEY.PRE_PAY_ORDER + payCallbackResData.getOut_trade_no()))
+            if (redisClient.isExist(PayConstants.REDISKEY.PRE_PAY_ORDER + payCallbackResData.getOut_trade_no()))
             {
-            	PayVo payVo = redisUtil.get(REDISKEY.PRE_PAY_ORDER + payCallbackResData.getOut_trade_no());
+            	PayVo payVo = redisClient.get(PayConstants.REDISKEY.PRE_PAY_ORDER + payCallbackResData.getOut_trade_no());
                 int total_fee = (int) Double.parseDouble(payCallbackResData.getTotal_fee());
-                reqResult = getPayPurpose(payVo.getPayPurpose()).doPurpose(payVo,
+                reqResult = getPayPurposeHandler(payVo.getPayPurpose()).doPurpose(payVo,
                         TimeUtil.parseDate(payCallbackResData.getTime_end(), "yyyyMMddHHmmss"),
                         payCallbackResData.getTransaction_id(), total_fee);
                 if (reqResult.isSuccess())
@@ -227,50 +254,29 @@ public class WXPayAction extends PayAction {
                     genReturnXML(reqResult, "SUCCESS", "OK");
                 }
                 //只有成功充值的学员才充值送
-            	if(reqResult.isSuccess() && payVo.getUserType()==OrderConstant.USETYPE.STUDENT && payVo.getPayPurpose() == PurposeType.CHARGE){
-            	  try {
-            		RechargeRecordVo record=new RechargeRecordVo();
-            		record.setCharge(payVo.getPayValue());
-            		record.setStudentId(payVo.getUserId());
-            		record.setCuid(payVo.getUserId());
-            		record.setPayTime(new Date());
-            		record.setPayWay(payVo.getPayWay());
-            		record.setWaterId(payCallbackResData.getTransaction_id());
-            		rechargeService.recharge(record);
-            	  }catch(Exception e){
-            		  emailService.send("【系统】[用户微信支付异常啦，记录充值送异常，请抓紧时间处理！！]", "WXPayAction-->doPayAction --> rechargeService fail ! payVo: " + payVo);
-            		  logger.error(reqResult+" with "+payVo+" Exception:"+e.getMessage(),e);
-            	  }
-            	} else {
-            		logger.error(reqResult+" with "+payVo+" is not incorrect,so do nothing.");
-            		//20160905报名回调失败处理
-            		/*if (!reqResult.isSuccess() && payVo.getPayPurpose() == PurposeType.SIGNUP) {
-            			try {
-            				Message msg=new Message();
-            				msg.setTopic(payRehandleProducer.getCreateTopicKey());
-            				msg.setTags(OrderConstant.RMQTAG.STUDENT_ENROLL_PAY);
-            				PayMessage pmsg = new PayMessage();
-            				pmsg = BeanCopy.copyNotNull(payVo, pmsg);
-            				
-            				pmsg.setEndTime(TimeUtil.parseDate(payCallbackResData.getTime_end(), "yyyyMMddHHmmss"));;
-            				pmsg.setWaterNum(payCallbackResData.getTransaction_id());
-            				pmsg.setTotalFee(total_fee);
-            				msg.setBody(SerializableUtil.serialize(pmsg));
-            				payRehandleProducer.send(msg);
-            				logger.debug("payErrorProducer has sent a message. MSGTYPE_STUDENT_REGISTER. payVo: "+ payVo);
-            			} 
-            			catch (Exception e) {
-            				 emailService.send("【系统】[用户微信支付异常啦，发送MQ处理失败，请抓紧时间处理！！]", "WXPayAction-->doPayAction --> payRehandleProducer fail ! payVo: " + payVo);
-            				logger.error("payErrorProducer error "+e);
-            				e.printStackTrace();
-            			} 
-            		}*/
-            	}
+//            	if(reqResult.isSuccess() && payVo.getUserType()==OrderConstant.USETYPE.STUDENT && payVo.getPayPurpose() == PurposeType.CHARGE){
+//            	  try {
+//            		RechargeRecordVo record=new RechargeRecordVo();
+//            		record.setCharge(payVo.getPayValue());
+//            		record.setStudentId(payVo.getUserId());
+//            		record.setCuid(payVo.getUserId());
+//            		record.setPayTime(new Date());
+//            		record.setPayWay(payVo.getPayWay());
+//            		record.setWaterId(payCallbackResData.getTransaction_id());
+//            		rechargeService.recharge(record);
+//            	  }catch(Exception e){
+//            		  //emailService.send("【系统】[用户微信支付异常啦，记录充值送异常，请抓紧时间处理！！]", "WXPayAction-->doPayAction --> rechargeService fail ! payVo: " + payVo);
+//            		  logger.error(reqResult+" with "+payVo+" Exception:"+e.getMessage(),e);
+//            	  }
+//            	} else {
+//            		logger.error(reqResult+" with "+payVo+" is not incorrect,so do nothing.");
+//            		
+//            	}
             }
         }
         else
         {
-        	emailService.send("【系统】[用户微信支付异常啦，请抓紧时间处理！！]", "WXPayAction-->doPayAction --> payCallbackResData");
+        	//emailService.send("【系统】[用户微信支付异常啦，请抓紧时间处理！！]", "WXPayAction-->doPayAction --> payCallbackResData");
             genReturnXML(reqResult, "FAIL", payCallbackResData.getErr_code_des());
         }
         return reqResult;
@@ -291,7 +297,7 @@ public class WXPayAction extends PayAction {
         return payInfoVo;
     }
 
-    public static void genReturnXML(ReqResult reqResult, String return_code, String return_msg)
+    public static void genReturnXML(PayReqResult reqResult, String return_code, String return_msg)
     {
         ReturnToWXReq returnToWXReq = new ReturnToWXReq(return_code, return_msg);
         // 解决XStream对出现双下划线的bug
@@ -443,4 +449,10 @@ public class WXPayAction extends PayAction {
 
     }
 
+	@Override
+	public IPayPurpose getPayPurposeHandler(PurposeType purposeType) {
+		return PurposeHandlerFactory.getHandler(purposeType);
+	}
+
+	
 }
