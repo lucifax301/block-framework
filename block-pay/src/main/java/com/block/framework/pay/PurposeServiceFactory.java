@@ -1,11 +1,10 @@
 package com.block.framework.pay;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class PurposeServiceFactory {
 
-	private static Map<PurposeType,IPayPurposeService> purposeHandler = new HashMap<PurposeType,IPayPurposeService>();
+	private static ConcurrentHashMap<PurposeType,IPayPurposeService> purposeHandler = new ConcurrentHashMap<PurposeType,IPayPurposeService>();
 	
 	public static void addHandler(PurposeType purposeType,IPayPurposeService handler){
 		purposeHandler.putIfAbsent(purposeType, handler);

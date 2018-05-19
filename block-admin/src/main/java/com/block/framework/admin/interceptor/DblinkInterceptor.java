@@ -27,16 +27,16 @@ import com.block.framework.core.constant.CoreConstants;
  * controller层获取用户的session信息 ,并把session中数据库信息设置到BaseModel中。
  * @author lilixc
  */
-@Aspect
-@Component
+//@Aspect
+//@Component
 public class DblinkInterceptor {
 
 	//对spring的mapping注解做aop拦截
-	@Pointcut("@annotation(org.springframework.web.bind.annotation.RequestMapping)")
+	//@Pointcut("@annotation(org.springframework.web.bind.annotation.RequestMapping)")
 	public void controllerAspect() {
 	}
 
-	@Before("controllerAspect()")
+	//@Before("controllerAspect()")
 	public void before(JoinPoint joinPoint) {
 		System.out.println("dblink已经记录下操作日志@Before 方法执行前");
 		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
@@ -66,14 +66,14 @@ public class DblinkInterceptor {
 		}
 	}
 	
-	@Around("controllerAspect()")
+	//@Around("controllerAspect()")
     public Object around(ProceedingJoinPoint pjp) throws Throwable{
 		System.out.println("dblink已经记录下操作日志@Around 方法执行前");
         return pjp.proceed();
        
     }
 
-    @After("controllerAspect()")
+    //@After("controllerAspect()")
     public void after() {
         System.out.println("dblink已经记录下操作日志@After 方法执行后");
     }

@@ -319,5 +319,12 @@
   	<module>block-config</module>
   	<module>block-metric</module>
   	<module>wxpay</module>
+  	<module>block-cache</module>
+  	<module>demo-api</module>
+  	<module>demo-service</module>
+  	<module>demo-web</module>
+  	<module>block-sms</module>
+  	<module>demo-httpaccess</module>
+  	<module>block-file</module>
   </modules>
 </project>

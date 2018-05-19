@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.block.demo.demo.mapper.DemoMapper" >
+  <resultMap id="BaseResultMap" type="com.block.demo.demo.DemoModel" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="val" property="val" jdbcType="VARCHAR" />
+    <result column="cuid" property="cuid" jdbcType="INTEGER" />
+    <result column="muid" property="muid" jdbcType="INTEGER" />
+    <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
+    <result column="mtime" property="mtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id,name,val,cuid,ctime
+  </sql>
+  <select id="getMarket" resultMap="BaseResultMap" parameterType="com.block.demo.demo.DemoModel" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_demo
+    where id = #{id}
+  </select>
+  
+  
+  <select id="listMarket" resultMap="BaseResultMap"  >
+    select 
+    <include refid="Base_Column_List" />
+    from t_demo
+    <where>
+    
+	 
+	<if test="name != null and name !=''">
+		and name like  concat(concat('%',#{name}),'%')
+	</if>
+	<if test="beginDate != null ">
+		and ctime >= #{beginDate}
+	</if>
+	<if test="endDate != null ">
+		<![CDATA[and ctime < #{endDate}]]> 
+	</if>
+	</where>
+	order by id desc
+  </select>
+
+
+  <insert id="addMarket" parameterType="com.block.demo.demo.DemoModel" >
+    insert into t_demo (name, val, cuid,ctime)
+    values (#{name},#{val},#{cuid},  now())
+  </insert>
+  
+  
+</mapper>

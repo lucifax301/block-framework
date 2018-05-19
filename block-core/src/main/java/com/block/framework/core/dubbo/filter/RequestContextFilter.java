@@ -1,4 +1,4 @@
-package com.block.framework.core.dubbofilter;
+package com.block.framework.core.dubbo.filter;
 
 import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.common.extension.Activate;

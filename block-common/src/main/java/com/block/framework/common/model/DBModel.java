@@ -1,6 +1,7 @@
 package com.block.framework.common.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -24,9 +25,31 @@ public class DBModel extends BaseModel implements Serializable{
 	@JsonIgnore
 	private Integer pageSize = 10;
 
+	private Date beginDate;
+	
+	private Date endDate;
+	
 	// 排序
 	@JsonIgnore
 	private String orders;
+	
+	
+
+	public Date getBeginDate() {
+		return beginDate;
+	}
+
+	public void setBeginDate(Date beginDate) {
+		this.beginDate = beginDate;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
 
 	public boolean isMgrdb() {
 		return mgrdb;

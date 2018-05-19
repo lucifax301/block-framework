@@ -1,1 +1,1 @@
-requestContext=com.block.framework.core.dubbofilter.RequestContextFilter
+requestContext=com.block.framework.core.dubbo.filter.RequestContextFilter
