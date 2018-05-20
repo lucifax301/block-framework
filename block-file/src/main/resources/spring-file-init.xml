@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+	http://code.alibabatech.com/schema/dubbo 
+	http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	
+	<!--  <context:property-placeholder location="classpath*:*.properties" ignore-unresolvable="true"/>-->
+	<bean id="fileResources" class="java.util.ArrayList">  
+        <constructor-arg>  
+        <list>  
+            <value>classpath*:qiniu.properties</value>  
+        </list>  
+        </constructor-arg>  
+    </bean>  
+	
+	<bean id="qiniuConfig" class="com.block.framework.pay.wxpay.config.WXPayConfig">
+        
+        <property name="certLocalPath" value="${wx.pay.certLocalPath}"/>
+        <property name="certPassword" value="${wx.pay.certPassword}"/>
+        <property name="useThreadToDoReport" value="${wx.pay.useThreadToDoReport}"/>
+        <property name="notifyUrl" value="${wx.pay.notifyUrl}"/>
+        
+    </bean>
+	
+	<bean id="qiniuFileService" class="com.block.framework.file.impl.QiniuFileServiceImpl"/>
+	
+	<bean id="fileServiceFactory" class="com.block.framework.file.FileServiceFactory">
+		<property name="services">
+            <map>
+                <entry key="qiniu" value-ref="qiniuFileService" />
+            </map>
+        </property>
+    </bean>
+</beans>

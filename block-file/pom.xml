@@ -6,4 +6,15 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>block-file</artifactId>
+  
+  <dependencies>
+		<dependency>
+			<groupId>com.block</groupId>
+			<artifactId>block-common</artifactId>
+			<version>${project.version}</version>
+			<type>jar</type>
+		</dependency>
+		
+		
+	</dependencies>	
 </project>
