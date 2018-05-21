@@ -40,16 +40,11 @@ public class LoginInterceptorAdapter extends HandlerInterceptorAdapter {
 		if(devProperties.getDev().equals("0")){
 			AdminUser user0=new AdminUser();
 			user0.setId(22);
-			user0.setUsername("admin");
-			user0.setRealname("系统管理员");
-			user0.setLevel((byte)2);
-			user0.setRoleid(1);
-			user0.setAreaid(3);
-			user0.setStoreid(3);
-			user0.setStorenum("1");
-			user0.setAreanum("22");
-			user0.setRoleid(1);
-			user0.setStorename("宝安区虹桥门店");
+			user0.setUserName("admin");
+			user0.setRealName("系统管理员");
+			
+			user0.setRoleId(1);
+			
 			session.setAttribute(CoreConstants.USER_SESSION, user0); 
 			RequestContext.putValue(CoreConstants.USER_SESSION, user0);
         	return true;

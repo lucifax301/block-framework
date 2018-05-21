@@ -1,51 +1,42 @@
 package com.block.framework.admin.model;
 
-import java.text.SimpleDateFormat;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 import com.block.framework.common.model.BuModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class AdminUser extends BuModel {
+public class AdminUser extends BuModel implements Serializable{
 	
 	private Integer id;
 
-	private String username;
+	private String userName;
 
 	@JsonIgnore
 	private String password;
 
-	private String realname;
+	private String realName;
 
 	private String mobile;
 
-	private Integer roleid;
+	private Integer roleId;
 
-	private Byte issuper;
+	//0 commom 1 super
+	private Integer superAdmin;
 
-	private Byte status;
+	private Integer status;
+	//0 normal 1 deleted
+	private Integer deleted;
 
-	private Byte isdel;
-
-	private String invitecode;
+	//0 normal 1 admin
+	private Integer admin;
 	
-	private Integer areaid;
+	private String roleName;
 	
-	private Integer storeid;
 	
-	//角色数据
-	private Byte level;
-	
-	private Byte isGroup;
-	
-	private Byte isAdmin;
-	
-	private String rolename;
-	
-	private Byte roletype;
 	//1--启用，0--停用
-	private Byte enable;
+	private Integer enable;
 	
 	private String remark;
 	
@@ -54,345 +45,312 @@ public class AdminUser extends BuModel {
 	private String updator;
 	
 	
-	private int privilegeCount;
-	
-	private int userCount;
 
 	private List<RolePrivilege> rolePrivileges;
 	
 	private String privilegestr;
 		
-	private Integer deptid;
 	
-	private Integer deptflag;
-	
-	private String storename;
-
-	private String areaname;
-	
-	private String storenum;
-	
-	private String areanum;
 	
 	private static final long serialVersionUID = 1L;
 
-	private Integer staffid;
 	
-	private int firstlogin;
+	//1 the first time to login,0 not
+	private int firstLogin;
 	
-	private String oldpassword;
+	private Date firstLoginTime;
 	
+	private Date lastLoginTime;
 	
-
-	public String getOldpassword() {
-		return oldpassword;
-	}
-
-	public void setOldpassword(String oldpassword) {
-		this.oldpassword = oldpassword;
-	}
-
-	public int getFirstlogin() {
-		return firstlogin;
-	}
-
-	public void setFirstlogin(int firstlogin) {
-		this.firstlogin = firstlogin;
-	}
-
-	public Integer getStaffid() {
-		return staffid;
-	}
-
-	public void setStaffid(Integer staffid) {
-		this.staffid = staffid;
-	}
-
-	public Integer getDeptid() {
-		return deptid;
-	}
-
-	public void setDeptid(Integer deptid) {
-		this.deptid = deptid;
-	}
-
-	public Integer getDeptflag() {
-		return deptflag;
-	}
-
-	public void setDeptflag(Integer deptflag) {
-		this.deptflag = deptflag;
-	}
-
-	public Byte getRoletype() {
-		return roletype;
-	}
-
-	public void setRoletype(Byte roletype) {
-		this.roletype = roletype;
-	}
-
-	public Byte getLevel() {
-		return level;
-	}
-
-	public void setLevel(Byte level) {
-		this.level = level;
-	}
-
-	public Byte getIsGroup() {
-		return isGroup;
-	}
-
-	public void setIsGroup(Byte isGroup) {
-		this.isGroup = isGroup;
-	}
-
-	public Byte getIsAdmin() {
-		return isAdmin;
-	}
-
-	public void setIsAdmin(Byte isAdmin) {
-		this.isAdmin = isAdmin;
-	}
-
-	
-
-	public String getRolename() {
-		return rolename;
-	}
-
-	public void setRolename(String rolename) {
-		this.rolename = rolename;
-	}
-
-	public Byte getEnable() {
-		return enable;
-	}
-
-	public void setEnable(Byte enable) {
-		this.enable = enable;
-	}
-
-	public String getRemark() {
-		return remark;
-	}
-
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
-
-	public String getCreator() {
-		return creator;
-	}
-
-	public void setCreator(String creator) {
-		this.creator = creator;
-	}
-
-	public String getUpdator() {
-		return updator;
-	}
-
-	public void setUpdator(String updator) {
-		this.updator = updator;
-	}
-
-	public int getPrivilegeCount() {
-		return privilegeCount;
-	}
-
-	public void setPrivilegeCount(int privilegeCount) {
-		this.privilegeCount = privilegeCount;
-	}
-
-	public int getUserCount() {
-		return userCount;
-	}
-
-	public void setUserCount(int userCount) {
-		this.userCount = userCount;
-	}
-
-	public List<RolePrivilege> getRolePrivileges() {
-		return rolePrivileges;
-	}
-
-	public void setRolePrivileges(List<RolePrivilege> rolePrivileges) {
-		this.rolePrivileges = rolePrivileges;
-	}
-
-	public String getPrivilegestr() {
-		return privilegestr;
-	}
-
-	public void setPrivilegestr(String privilegestr) {
-		this.privilegestr = privilegestr;
-	}
-
-	private List<Privilege> privileges;
-	
-	public AdminUser(){
 		
-	}
 	
-	public AdminUser(int id){
-		this.id=id;
-	}
 	
 	public Integer getId() {
 		return id;
 	}
 
+
+
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public String getUsername() {
-		return username;
+
+
+
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setUsername(String username) {
-		this.username = username == null ? null : username.trim();
+
+
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
+
+
+
 
 	public String getPassword() {
 		return password;
 	}
 
+
+
+
 	public void setPassword(String password) {
-		this.password = password == null ? null : password.trim();
+		this.password = password;
 	}
 
-	public String getRealname() {
-		return realname;
+
+
+
+	public String getRealName() {
+		return realName;
 	}
 
-	public void setRealname(String realname) {
-		this.realname = realname == null ? null : realname.trim();
+
+
+
+	public void setRealName(String realName) {
+		this.realName = realName;
 	}
+
+
+
 
 	public String getMobile() {
 		return mobile;
 	}
 
+
+
+
 	public void setMobile(String mobile) {
-		this.mobile = mobile == null ? null : mobile.trim();
+		this.mobile = mobile;
 	}
 
-	public Integer getRoleid() {
-		return roleid;
+
+
+
+	public Integer getRoleId() {
+		return roleId;
 	}
 
-	public void setRoleid(Integer roleid) {
-		this.roleid = roleid;
+
+
+
+	public void setRoleId(Integer roleId) {
+		this.roleId = roleId;
 	}
 
-	public Byte getIssuper() {
-		return issuper;
+
+
+
+	public Integer getSuperAdmin() {
+		return superAdmin;
 	}
 
-	public void setIssuper(Byte issuper) {
-		this.issuper = issuper;
+
+
+
+	public void setSuperAdmin(Integer superAdmin) {
+		this.superAdmin = superAdmin;
 	}
 
-	public Byte getStatus() {
+
+
+
+	public Integer getStatus() {
 		return status;
 	}
 
-	public void setStatus(Byte status) {
+
+
+
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 
-	
-	public Byte getIsdel() {
-		return isdel;
+
+
+
+	public Integer getDeleted() {
+		return deleted;
 	}
 
-	public void setIsdel(Byte isdel) {
-		this.isdel = isdel;
+
+
+
+	public void setDeleted(Integer deleted) {
+		this.deleted = deleted;
 	}
 
-	public String getInvitecode() {
-		return invitecode;
+
+
+
+	public Integer getAdmin() {
+		return admin;
 	}
 
-	public void setInvitecode(String invitecode) {
-		this.invitecode = invitecode;
+
+
+
+	public void setAdmin(Integer admin) {
+		this.admin = admin;
 	}
 
-	public List<Privilege> getPrivileges() {
-		return privileges;
+
+
+
+	public String getRoleName() {
+		return roleName;
 	}
 
-	public void setPrivileges(List<Privilege> privileges) {
-		this.privileges = privileges;
+
+
+
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
 	}
 
-	
 
-	public Integer getAreaid() {
-		return areaid;
+
+
+	public Integer getEnable() {
+		return enable;
 	}
 
-	public void setAreaid(Integer areaid) {
-		this.areaid = areaid;
+
+
+
+	public void setEnable(Integer enable) {
+		this.enable = enable;
 	}
 
-	public Integer getStoreid() {
-		return storeid;
+
+
+
+	public String getRemark() {
+		return remark;
 	}
 
-	public void setStoreid(Integer storeid) {
-		this.storeid = storeid;
+
+
+
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 
-	public String getStorename() {
-		return storename;
+
+
+
+	public String getCreator() {
+		return creator;
 	}
 
-	public void setStorename(String storename) {
-		this.storename = storename;
+
+
+
+	public void setCreator(String creator) {
+		this.creator = creator;
 	}
 
-	public String getAreaname() {
-		return areaname;
+
+
+
+	public String getUpdator() {
+		return updator;
 	}
 
-	public void setAreaname(String areaname) {
-		this.areaname = areaname;
+
+
+
+	public void setUpdator(String updator) {
+		this.updator = updator;
 	}
 
-	public String getStorenum() {
-		return storenum;
+
+
+
+	public List<RolePrivilege> getRolePrivileges() {
+		return rolePrivileges;
 	}
 
-	public void setStorenum(String storenum) {
-		this.storenum = storenum;
+
+
+
+	public void setRolePrivileges(List<RolePrivilege> rolePrivileges) {
+		this.rolePrivileges = rolePrivileges;
 	}
 
-	public String getAreanum() {
-		return areanum;
+
+
+
+	public String getPrivilegestr() {
+		return privilegestr;
 	}
 
-	public void setAreanum(String areanum) {
-		this.areanum = areanum;
+
+
+
+	public void setPrivilegestr(String privilegestr) {
+		this.privilegestr = privilegestr;
 	}
 
-	
+
+
+
+	public int getFirstLogin() {
+		return firstLogin;
+	}
+
+
+
+
+	public void setFirstLogin(int firstLogin) {
+		this.firstLogin = firstLogin;
+	}
+
+
+
+
+	public Date getFirstLoginTime() {
+		return firstLoginTime;
+	}
+
+
+
+
+	public void setFirstLoginTime(Date firstLoginTime) {
+		this.firstLoginTime = firstLoginTime;
+	}
+
+
+
+
+	public Date getLastLoginTime() {
+		return lastLoginTime;
+	}
+
+
+
+
+	public void setLastLoginTime(Date lastLoginTime) {
+		this.lastLoginTime = lastLoginTime;
+	}
+
+
+
+
 	@Override
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", username='" + username + '\'' +
-            ", realname='" + realname + '\'' +
-            ", areaid=" + areaid +
-            ", storeid=" + storeid +
-            ", rolename='" + rolename + '\'' +
-            ", storename='" + storename + '\'' +
-            ", areaname='" + areaname + '\'' +
-            ", storenum='" + storenum + '\'' +
-            ", areanum='" + areanum + '\'' +
+                ", username='" + userName + '\'' +
+            ", realname='" + realName + '\'' +
             ", dblink='" + super.getDblink() + '\'' +
             '}';
 }

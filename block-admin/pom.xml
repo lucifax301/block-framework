@@ -20,6 +20,12 @@
 			<version>${project.version}</version>
 			<type>jar</type>
 		</dependency>
+		<dependency>
+			<groupId>com.block</groupId>
+			<artifactId>block-file</artifactId>
+			<version>${project.version}</version>
+			<type>jar</type>
+		</dependency>
 		
 		<dependency>
             <groupId>org.jeecg</groupId>
