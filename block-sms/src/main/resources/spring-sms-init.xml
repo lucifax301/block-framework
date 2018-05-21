@@ -19,27 +19,23 @@
 	<bean id="fileResources" class="java.util.ArrayList">  
         <constructor-arg>  
         <list>  
-            <value>classpath*:qiniu.properties</value>  
+            <value>classpath*:sms-ali.properties</value>  
         </list>  
         </constructor-arg>  
     </bean>  
 	
-	<bean id="qiniuConfig" class="com.block.framework.file.qiniu.QiniuConfig">
-        
-        <property name="bucklet" value="${wx.pay.certLocalPath}"/>
-        <property name="ak" value="${wx.pay.certPassword}"/>
-        <property name="sk" value="${wx.pay.useThreadToDoReport}"/>
-        <property name="domain" value="${wx.pay.notifyUrl}"/>
-        
+	<bean id="aliSmsConfig" class="com.block.framework.sms.alibaba.SmsConfig">
+        <property name="accessKeyId" value="${sms.ali.accessKeyId}"/>
+        <property name="accessKeySecret" value="${sms.ali.accessKeySecret}"/>
     </bean>
 	
-	<bean id="qiniuFileService" class="com.block.framework.file.impl.QiniuFileServiceImpl"/>
+	<bean id="aliSmsService" class="com.block.framework.sms.alibaba.AliSmsServiceImpl"/>
 	
-	<bean id="fileServiceFactory" class="com.block.framework.file.FileServiceFactory">
-		<property name="defaultName" value="qiniu"></property>
+	<bean id="fileServiceFactory" class="com.block.framework.sms.SmsServiceFactory">
+		<property name="defaultName" value="ali"></property>
 		<property name="services">
             <map>
-                <entry key="qiniu" value-ref="qiniuFileService" />
+                <entry key="ali" value-ref="aliSmsService" />
             </map>
         </property>
     </bean>

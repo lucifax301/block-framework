@@ -3,23 +3,35 @@ package com.block.framework.file;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.block.framework.common.service.ServiceFactory;
 
-public class FileServiceFactory {
+
+public class FileServiceFactory implements ServiceFactory<FileService>{
 
 	private Map<String,FileService> services = new HashMap<String,FileService>();
+	
+	private String defaultName;
 
-	
-	
-	public Map<String, FileService> getPayGateways() {
+	public Map<String, FileService> getServices() {
 		return services;
 	}
 
-	public void setPayGateways(Map<String, FileService> services) {
+
+	public void setServices(Map<String, FileService> services) {
 		this.services = services;
 	}
-	
-	public FileService getPayAction(String name)
-    {
+
+
+	@Override
+	public FileService getService(String name) {
 		return services.get(name);
-    }
+	}
+
+
+	@Override
+	public FileService getService() {
+		return getService(defaultName);
+	}
+	
+	
 }

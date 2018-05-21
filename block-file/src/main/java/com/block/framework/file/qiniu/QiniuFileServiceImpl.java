@@ -1,4 +1,4 @@
-package com.block.framework.file.impl;
+package com.block.framework.file.qiniu;
 
 import java.io.File;
 import java.io.InputStream;
@@ -9,7 +9,6 @@ import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Service;
 
 import com.block.framework.file.FileService;
-import com.block.framework.file.util.QiniuPicUtil;
 import com.qiniu.api.io.PutRet;
 
 //@Service

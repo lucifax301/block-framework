@@ -1,4 +1,4 @@
-package com.block.framework.file.util;
+package com.block.framework.file.qiniu;
 
 import java.io.File;
 

@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.block.framework.common.constant.ResultCode;
-import com.block.framework.common.util.StringUtil;
 import com.block.framework.pay.IPayPurposeService;
 import com.block.framework.pay.PayFactory;
 import com.block.framework.pay.PayReqResult;
@@ -16,7 +15,6 @@ import com.block.framework.pay.PayService;
 import com.block.framework.pay.PayVo;
 import com.block.framework.pay.PayWayType;
 import com.block.framework.pay.PurposeServiceFactory;
-import com.block.framework.pay.PurposeType;
 import com.block.framework.pay.util.PayConstants;
 import com.block.framework.redis.DistributedRedisLock;
 
