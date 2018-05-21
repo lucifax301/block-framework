@@ -326,5 +326,6 @@
   	<module>block-sms</module>
   	<module>demo-httpaccess</module>
   	<module>block-file</module>
+  	<module>block-search</module>
   </modules>
 </project>
