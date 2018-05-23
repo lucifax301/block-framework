@@ -15,8 +15,8 @@ import com.block.framework.file.UploadResult;
 
 @Controller
 @ResponseBody
-@RequestMapping(value="/file")
-public class FileController extends AdminController {
+@RequestMapping(value="/cfile")
+public class CDNFileController extends AdminController {
 
 	@Autowired
 	private FileServiceFactory fileServiceFactory;
@@ -24,7 +24,7 @@ public class FileController extends AdminController {
 	@RequestMapping(value="/uploadImg", method=RequestMethod.POST)
     public ResultBean uploadImg(@RequestParam("file") MultipartFile mfile, @RequestParam(value = "id", required = false) String id)
     throws Exception{
-		FileService service = fileServiceFactory.getService("local");
+		FileService service = fileServiceFactory.getService("qiniu");
 		String suffix = mfile.getOriginalFilename().substring(mfile.getOriginalFilename().lastIndexOf("."));
 		UploadResult result = service.updateImg(mfile.getInputStream(),suffix);
 		return this.<UploadResult>buildResult(result);
@@ -32,7 +32,7 @@ public class FileController extends AdminController {
 	
 	@RequestMapping(value="/uploadFile", method=RequestMethod.POST)
     public ResultBean uploadfile(@RequestParam("file") MultipartFile mfile) throws Exception {
-		FileService service = fileServiceFactory.getService("local");
+		FileService service = fileServiceFactory.getService("qiniu");
 		String suffix = mfile.getOriginalFilename().substring(mfile.getOriginalFilename().lastIndexOf("."));
 		UploadResult result = service.updateFile(mfile.getInputStream(), suffix);
 		return this.<UploadResult>buildResult(result);

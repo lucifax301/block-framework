@@ -24,6 +24,7 @@ public class ActionInterceptorAdapter extends HandlerInterceptorAdapter {
 		String traceId = TraceUtil.createTraceIdString();
 		rc.setTraceId(traceId);
 		rc.setIp(request.getRemoteAddr());
+		
 		return true;
 	}
 	

@@ -327,5 +327,6 @@
   	<module>demo-httpaccess</module>
   	<module>block-file</module>
   	<module>block-search</module>
+  	<module>block-pay-web</module>
   </modules>
 </project>

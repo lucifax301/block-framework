@@ -33,14 +33,18 @@
         
     </bean>
 	
-	<bean id="qiniuFileService" class="com.block.framework.file.impl.QiniuFileServiceImpl"/>
+	<bean id="qiniuFileService" class="com.block.framework.file.qiniu.QiniuFileServiceImpl"/>
+	
+	<bean id="localFileService" class="com.block.framework.file.local.LocalFileServiceImpl"/>
 	
 	<bean id="fileServiceFactory" class="com.block.framework.file.FileServiceFactory">
 		<property name="defaultName" value="qiniu"></property>
 		<property name="services">
             <map>
                 <entry key="qiniu" value-ref="qiniuFileService" />
+                <entry key="local" value-ref="localFileService" />
             </map>
+            
         </property>
     </bean>
 </beans>

@@ -6,16 +6,20 @@ import java.util.Date;
 import java.util.Random;
 
 import org.apache.commons.io.FileUtils;
-import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.block.framework.file.FileService;
+import com.block.framework.file.UploadResult;
 import com.qiniu.api.io.PutRet;
 
 //@Service
 public class QiniuFileServiceImpl implements FileService {
 
+	@Autowired
+	QiniuConfig config;
+	
 	@Override
-	public String updateFile(InputStream in,String suffix) throws Exception{
+	public UploadResult updateFile(InputStream in,String suffix) throws Exception{
 		Long timestamp = new Date().getTime();
 		Integer random = new Random().nextInt(1000);
 		
@@ -25,11 +29,13 @@ public class QiniuFileServiceImpl implements FileService {
 		System.out.println(file.getAbsolutePath());
 		
 		file.delete();
-		return ret.getKey();
+		UploadResult result = new UploadResult();
+		result.setPath(config.getDomain()+ret.getKey());
+		return result;
 	}
 
 	@Override
-	public String updateImg(InputStream in) throws Exception {
+	public UploadResult updateImg(InputStream in,String suffix) throws Exception {
 		Long timestamp = new Date().getTime();
 		Integer random = new Random().nextInt(1000);
 		File file = new File(timestamp.toString() + random.toString());
@@ -37,7 +43,9 @@ public class QiniuFileServiceImpl implements FileService {
 		PutRet ret = QiniuPicUtil.uploadFileWithRandomName(file);
 		System.out.println(file.getAbsolutePath());
 		file.delete();
-		return ret.getKey();
+		UploadResult result = new UploadResult();
+		result.setPath(config.getDomain()+ret.getKey());
+		return result;
 	}
 
 }
