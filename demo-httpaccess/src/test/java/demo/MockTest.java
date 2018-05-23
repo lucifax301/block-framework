@@ -35,8 +35,8 @@ public class MockTest {
 		//TestController.edit(null);
 		
 		MockMvc mockMvc =MockMvcBuilders.webAppContextSetup(wac).build();
-		//ResultActions resultActions = mockMvc.perform((MockMvcRequestBuilders.get("/demo/add").param("id", "1").param("name", "test").param("val", "valvalue").param("cuid", "12")));
-		ResultActions resultActions = mockMvc.perform((MockMvcRequestBuilders.get("/demo/list").param("id", "1").param("name", "test").param("val", "valvalue").param("cuid", "12")));
+		ResultActions resultActions = mockMvc.perform((MockMvcRequestBuilders.get("/demo/add").param("id", "1").param("name", "test").param("val", "valvalue").param("cuid", "12")));
+		//ResultActions resultActions = mockMvc.perform((MockMvcRequestBuilders.get("/demo/list").param("id", "1").param("name", "test").param("val", "valvalue").param("cuid", "12")));
 		MvcResult mvcResult = resultActions.andReturn();
         String result = mvcResult.getResponse().getContentAsString();
         System.out.println("response:" + result);

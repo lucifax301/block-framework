@@ -5,7 +5,7 @@ import java.util.List;
 import com.block.demo.demo.DemoModel;
 import com.block.framework.core.dao.BlockDao;
 
-public interface DemoMapper extends BlockDao<DemoModel> {
+public interface Demo2Mapper extends BlockDao<DemoModel> {
 
 	public void addMarket(DemoModel market);
 	
