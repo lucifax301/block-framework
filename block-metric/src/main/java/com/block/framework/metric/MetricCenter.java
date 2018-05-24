@@ -21,6 +21,17 @@ public class MetricCenter {
 
 	private static ConcurrentHashMap<String,MetricRegistry> map = new ConcurrentHashMap<String,MetricRegistry>();
 	
+	private static Map<String,MetricRegistry> pool=MigrateMap.makeComputingMap(new Function<String,MetricRegistry>(){
+
+		@Override
+		public MetricRegistry apply(String domain) {
+			MetricRegistry registry = new MetricRegistry();
+			MetricReporter.register(domain, registry);
+			return registry;
+		}
+	});
+
+	
 	private static MetricRegistry metricRegistry = getRegistry(domain);
 	
 	static{
@@ -31,20 +42,13 @@ public class MetricCenter {
 		metricRegistry.register(domain+".jvm.thread", new ThreadStatesGaugeSet());
 	}
 	
+		
 	private static MetricRegistry getRegistry(String domain){
 		MetricRegistry registry = pool.get(domain);
 		return registry;
 	}
 	
-	private static Map<String,MetricRegistry> pool=MigrateMap.makeComputingMap(new Function<String,MetricRegistry>(){
-
-		@Override
-		public MetricRegistry apply(String domain) {
-			MetricRegistry registry = new MetricRegistry();
-			MetricReporter.register(domain, registry);
-			return registry;
-		}
-	});
+	
 	
 	public static Meter meter(String name){
 		return new Meter(metricRegistry.meter(name));

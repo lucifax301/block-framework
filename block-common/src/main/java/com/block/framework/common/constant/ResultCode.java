@@ -31,6 +31,7 @@ public class ResultCode {
         public static final int USER_NOT_EXIT=14;
 		public static final int MOBILE_NUMBER_ERROR = 15;
 		public static final int MOBILE_NOT_EXIT_ERROR = 16;
+		public static final int PARAMEMPTY=17;
     }
     public class ERRORINFO {
         public static final String SUCCESS="操作成功";
@@ -51,6 +52,7 @@ public class ResultCode {
         public static final String USER_NOT_EXIT="用户不存在";
         public static final String MOBILE_NUMBER_ERROR="手机号码错误";
         public static final String MOBILE_NOT_EXIT_ERROR="手机号码不存在";
+        public static final String PARAMEMPTY="缺少参数";
     }
     
     private static ConcurrentHashMap<String,Integer> codeInfo=new ConcurrentHashMap<String,Integer>();

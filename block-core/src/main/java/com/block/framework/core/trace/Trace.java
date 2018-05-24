@@ -38,4 +38,10 @@ public class Trace {
 		}
 		return null;
 	}
+	
+	
+	
+	public static void close(InnerTrace innerTrace){
+		TraceReporterFactory.getReporter().report(innerTrace);
+	}
 }

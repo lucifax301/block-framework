@@ -1,0 +1,3 @@
+Æô¶¯jetty Àý×Ó
+windows
+java -server -Xms512m -Xmx1024m -XX:MaxPermSize=128M -XX:+PrintGCTimeStamps -XX:+PrintGCDetails -XX:+HeapDumpOnOutOfMemoryError -Dcom.sun.management.jmxremote.port=4444 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false -Dfile.encoding=UTF-8 -DappName=ierp-fileserver_ -DLOG_BACK_FILE=/logback.xml -DJETTY_PORT=8080 -DJETTY_WEBAPP_PATH=webapp -DJETTY_CONTEXT=/demo -Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,address=9800,server=y,suspend=n -classpath webapp\WEB-INF\classes;webapp\WEB-INF\lib\javax.servlet-api-3.1.0.jar;webapp\WEB-INF\lib\* com.block.framework.core.webserver.JettyServer
