@@ -39,9 +39,9 @@ public class Trace {
 		return null;
 	}
 	
-	
+	private static TraceReporterFactory traceReporterFactory=TraceReporterFactory.instance();
 	
 	public static void close(InnerTrace innerTrace){
-		TraceReporterFactory.getReporter().report(innerTrace);
+		traceReporterFactory.getReporter().report(innerTrace);
 	}
 }

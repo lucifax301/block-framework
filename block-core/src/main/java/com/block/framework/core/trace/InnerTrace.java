@@ -4,6 +4,10 @@ public class InnerTrace {
 
 	private String traceId;
 	
+	private String spanId;
+	
+	private int order;
+	
 	private InnerTrace parent;
 	
 	private long nanoStartTime;
@@ -14,7 +18,33 @@ public class InnerTrace {
 	
 	private String methodName;
 	
+	private String ip;
 	
+	
+
+	public String getSpanId() {
+		return spanId;
+	}
+
+	public void setSpanId(String spanId) {
+		this.spanId = spanId;
+	}
+
+	public int getOrder() {
+		return order;
+	}
+
+	public void setOrder(int order) {
+		this.order = order;
+	}
+
+	public String getIp() {
+		return ip;
+	}
+
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
 
 	public String getMethodName() {
 		return methodName;
