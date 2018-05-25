@@ -34,8 +34,8 @@ public class ServiceInterceptor {
 		MethodSignature methodSignature = (MethodSignature)joinPoint.getSignature();
 		Method method = methodSignature.getMethod();
 		System.out.println("beforeMethod "+method.getName()+" at time:"+new Date());
-		InnerTrace innerTrace =Trace.createTrace();
-		innerTrace.setMethodName(method.getName());
+		InnerTrace innerTrace =Trace.createTrace(method.getName());
+		//innerTrace.setMethodName(method.getName());
 		System.out.println(innerTrace);
 	}
 	

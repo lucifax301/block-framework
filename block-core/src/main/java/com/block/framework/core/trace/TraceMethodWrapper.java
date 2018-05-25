@@ -21,8 +21,8 @@ public class TraceMethodWrapper implements MethodInterceptor {
 		
 		try{
 			System.out.println("TraceMethodInterceptor beforeMethod "+method.getName()+" at time:"+new Date());
-			InnerTrace innerTrace =Trace.createTrace();
-			innerTrace.setMethodName(method.getName());
+			InnerTrace innerTrace =Trace.createTrace(method.getName());
+			//innerTrace.setMethodName(method.getName());
 			//o是TestServiceImpl$$EnhancerByCGLIB$$2e40b151, 调用invokeSuper 实际是调用TestServiceImpl$$EnhancerByCGLIB$$FastClassByCGLIB$$111d8bcd$$2e40b151的invoke方法
 			//会对传入的o参数做TestServiceImpl$$EnhancerByCGLIB$$2e40b151强转型,如果这里传的不是TestServiceImpl$$EnhancerByCGLIB$$2e40b151,而是 TestServiceImpl就会ClassCastException
 			//调用TestServiceImpl$$EnhancerByCGLIB$$2e40b151的fastclass的invoke方法
@@ -45,6 +45,7 @@ public class TraceMethodWrapper implements MethodInterceptor {
 		}finally{
 			System.out.println("TraceMethodInterceptor endMethod "+method.getName()+" at time:"+new Date());
 			InnerTrace innerTrace = Trace.endTrace();
+			innerTrace.close();
 		}
 	}
 
