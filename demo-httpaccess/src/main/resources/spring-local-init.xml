@@ -31,6 +31,7 @@
 	</bean>
 	
 	<import resource="classpath*:spring-log-init.xml"/>
+	<import resource="classpath*:spring-trace-init.xml"/>
 	<import resource="classpath*:spring-core-aop.xml" />
 	<import resource="classpath*:spring-database.xml"/>
 	<import resource="classpath*:spring-mybatis.xml"/>

@@ -55,5 +55,6 @@ public class TraceReporterFactory {
 	@PostConstruct  
     public void init() { 
 		factory = this;
+		
 	}
 }

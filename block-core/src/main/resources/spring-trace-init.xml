@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+	http://code.alibabatech.com/schema/dubbo 
+	http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	
+	
+	<bean id="dbsender" class="com.block.framework.core.trace.sender.DBTraceSender"/>
+	<bean id="logsender" class="com.block.framework.core.trace.sender.LogTraceSender"/>
+	
+	<bean id="traceSenderFactory" class="com.block.framework.core.trace.TraceSenderFactory">
+		<property name="defaultSender" value="dbsender"/>
+		<property name="senders">
+            <map>
+                <entry key="db" value-ref="dbsender" />
+                <entry key="log" value-ref="logsender" />
+            </map>
+        </property>
+    </bean>
+	
+	
+	<bean id="syncReporter" class="com.block.framework.core.trace.reporter.SyncDBTraceReporter"/>
+	<bean id="asyncReporter" class="com.block.framework.core.trace.reporter.AsyncDBTraceReporter"/>
+	
+	<bean id="traceReporterFactory" class="com.block.framework.core.trace.TraceReporterFactory">
+		<property name="defaultReporter" value="sync"/>
+		<property name="reporters">
+            <map>
+                <entry key="sync" value-ref="syncReporter" />
+                <entry key="async" value-ref="asyncReporter" />
+            </map>
+        </property>
+    </bean>
+</beans>

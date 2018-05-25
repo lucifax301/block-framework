@@ -2,6 +2,8 @@ package com.block.framework.core.trace;
 
 import java.util.concurrent.ConcurrentHashMap;
 
+import javax.annotation.PostConstruct;
+
 public class TraceSenderFactory {
 
 	private String defaultSender;
@@ -30,5 +32,9 @@ public class TraceSenderFactory {
 	
 	public TraceSender getSender(String name){
 		return senders.get(name);
+	}
+	@PostConstruct 
+	public void init(){
+		System.out.println("####################post contrauct TraceSenderFactory");
 	}
 }

@@ -13,7 +13,7 @@ import com.block.framework.core.trace.TraceSender;
 
 public abstract class AsyncTraceReporter implements TraceReporter {
 
-	private TraceSender sender = getSender();
+	private TraceSender sender = null;
 	
 	@Override
 	public boolean report(InnerTrace innerTrace) {
@@ -49,6 +49,7 @@ public abstract class AsyncTraceReporter implements TraceReporter {
 	public void init(){
 		TraceSenderConsumer consumer = new TraceSenderConsumer();
 		consumer.setDaemon(true);
+		sender = getSender();
 		consumer.start();
 	}
 	

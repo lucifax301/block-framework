@@ -2,6 +2,8 @@ package com.block.framework.core.dubbo.filter;
 
 import java.util.Map;
 
+import com.alibaba.dubbo.common.Constants;
+import com.alibaba.dubbo.common.extension.Activate;
 import com.alibaba.dubbo.rpc.Filter;
 import com.alibaba.dubbo.rpc.Invocation;
 import com.alibaba.dubbo.rpc.Invoker;
@@ -13,6 +15,7 @@ import com.block.framework.core.trace.InnerTrace;
 import com.block.framework.core.trace.Trace;
 import com.block.framework.core.trace.dubbo.DubboTraceExtractor;
 
+@Activate(group={Constants.PROVIDER},order=-7000)
 public class TraceProviderFilter implements Filter {
 
 	String ip = NetAddressUtil.getLocalIpAddress();
