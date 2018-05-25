@@ -8,6 +8,7 @@ import java.util.Random;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.block.framework.file.FileItem;
 import com.block.framework.file.FileService;
 import com.block.framework.file.UploadResult;
 import com.qiniu.api.io.PutRet;
@@ -19,12 +20,14 @@ public class QiniuFileServiceImpl implements FileService {
 	QiniuConfig config;
 	
 	@Override
-	public UploadResult updateFile(InputStream in,String suffix) throws Exception{
+	public UploadResult updateFile(FileItem fileItem) throws Exception{
 		Long timestamp = new Date().getTime();
 		Integer random = new Random().nextInt(1000);
-		
-		File file = new File(timestamp.toString() + random.toString() + suffix);
-		FileUtils.copyInputStreamToFile(in, file);
+		String fileName = fileItem.getFileName();
+		if(fileName==null)
+			fileName = timestamp.toString() + random.toString();
+		File file = new File(fileName + fileItem.getSuffix());
+		FileUtils.copyInputStreamToFile(fileItem.getInput(), file);
 		PutRet ret = QiniuPicUtil.uploadFile(file);
 		System.out.println(file.getAbsolutePath());
 		
@@ -35,12 +38,21 @@ public class QiniuFileServiceImpl implements FileService {
 	}
 
 	@Override
-	public UploadResult updateImg(InputStream in,String suffix) throws Exception {
+	public UploadResult updateImg(FileItem fileItem) throws Exception {
 		Long timestamp = new Date().getTime();
 		Integer random = new Random().nextInt(1000);
-		File file = new File(timestamp.toString() + random.toString());
-		FileUtils.copyInputStreamToFile(in, file);
-		PutRet ret = QiniuPicUtil.uploadFileWithRandomName(file);
+		String fileName = fileItem.getFileName();
+		if(fileName==null)
+			fileName = timestamp.toString() + random.toString();
+		File file = new File(fileName+fileItem.getSuffix());
+		FileUtils.copyInputStreamToFile(fileItem.getInput(), file);
+		PutRet ret = null;
+		if(fileItem.getFileName()==null){
+			ret = QiniuPicUtil.uploadFileWithRandomName(file);
+		}else{
+			ret = QiniuPicUtil.uploadFile(file);
+		}
+		
 		System.out.println(file.getAbsolutePath());
 		file.delete();
 		UploadResult result = new UploadResult();

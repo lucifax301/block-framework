@@ -9,7 +9,7 @@ public interface FileService {
 	 * @param in 上传文件输入流
 	 * @return 文件路径
 	 */
-	UploadResult updateFile(InputStream in,String suffix) throws Exception;
+	UploadResult updateFile(FileItem fileItem) throws Exception;
 	
-	UploadResult updateImg(InputStream in,String suffix) throws Exception;
+	UploadResult updateImg(FileItem fileItem) throws Exception;
 }
