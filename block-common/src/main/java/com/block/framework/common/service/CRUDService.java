@@ -1,4 +1,4 @@
-package com.block.framework.core;
+package com.block.framework.common.service;
 
 import java.util.List;
 

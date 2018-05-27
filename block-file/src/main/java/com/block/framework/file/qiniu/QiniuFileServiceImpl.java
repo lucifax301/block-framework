@@ -33,7 +33,8 @@ public class QiniuFileServiceImpl implements FileService {
 		
 		file.delete();
 		UploadResult result = new UploadResult();
-		result.setPath(config.getDomain()+ret.getKey());
+		result.setUrl(config.getDomain()+ret.getKey());
+		//result.setPath(config.getDomain()+ret.getKey());
 		return result;
 	}
 
@@ -56,7 +57,8 @@ public class QiniuFileServiceImpl implements FileService {
 		System.out.println(file.getAbsolutePath());
 		file.delete();
 		UploadResult result = new UploadResult();
-		result.setPath(config.getDomain()+ret.getKey());
+		//result.setPath(config.getDomain()+ret.getKey());
+		result.setUrl(config.getDomain()+ret.getKey());
 		return result;
 	}
 

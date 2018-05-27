@@ -26,7 +26,7 @@ public class BlockCacheObjectFactory {
 		}
 	});
 	
-	public static Object getObject(Class<?> clz){
-		return pool.get(clz);
+	public static <T> T getObject(Class<T> clz){
+		return (T)pool.get(clz);
 	}
 }
