@@ -27,4 +27,17 @@
             </map>
         </property>
     </bean>
+    
+    <bean id="cacheInterceptor" class="com.block.framework.cache.aop.CacheAspect"></bean>
+	
+	<aop:config>
+		<aop:pointcut expression="@annotation(com.block.framework.cache.annotation.DataCache)" id="cacheProxyPointcut"/>
+		
+		<aop:aspect id="cacheAspect" ref="cacheInterceptor">
+		<aop:around method="get" pointcut-ref="cacheProxyPointcut"/>
+		
+		</aop:aspect>
+
+	</aop:config>
+    
 </beans>

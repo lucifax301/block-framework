@@ -3,7 +3,8 @@ package com.block.demo.demo.mapper;
 import java.util.List;
 
 import com.block.demo.demo.DemoModel;
-import com.block.framework.core.dao.BlockDao;
+import com.block.framework.common.dao.BlockDao;
+
 
 public interface Demo2Mapper extends BlockDao<DemoModel> {
 

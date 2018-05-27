@@ -20,4 +20,9 @@ public class BlockRedisCache implements BlockCache {
 		return redisClient.get(key);
 	}
 
+	@Override
+	public <T> void remove(String key) {
+		redisClient.del(key);
+	}
+
 }

@@ -13,6 +13,7 @@ import com.block.demo.demo.DemoModel;
 import com.block.demo.demo.service.DemoService;
 import com.block.framework.common.model.ResultBean;
 import com.block.framework.core.ServiceMediator;
+import com.block.framework.core.proxy.ProxyPool;
 import com.block.framework.web.controller.BaseController;
 
 @Controller
@@ -27,6 +28,8 @@ public class DemoController extends BaseController {
 		@RequestMapping(value="/add")
 		public ResultBean addMarketing(DemoModel activity,HttpServletRequest request){
 			System.out.println("#################val:"+request.getParameter("val"));
+			Object obj = ProxyPool.get(DemoService.class);
+			System.out.println(obj);
 			DemoService demoService = serviceMediator.getService(DemoService.class);
 			return demoService.saveData(activity);
 		}

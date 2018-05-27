@@ -9,6 +9,10 @@ public class RequestContext {
 	
 	private String ip;
 	
+	private int order;
+	
+	private String level;
+	
 	private Map<String,Object> data = new ConcurrentHashMap<String,Object>(2);
 	
 	private static ThreadLocal<RequestContext> current = new ThreadLocal<RequestContext>();
@@ -69,6 +73,22 @@ public class RequestContext {
 
 	public void setIp(String ip) {
 		this.ip = ip;
+	}
+
+	public int getOrder() {
+		return order;
+	}
+
+	public void setOrder(int order) {
+		this.order = order;
+	}
+
+	public String getLevel() {
+		return level;
+	}
+
+	public void setLevel(String level) {
+		this.level = level;
 	}
 	
 	

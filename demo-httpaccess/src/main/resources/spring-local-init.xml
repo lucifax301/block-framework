@@ -30,6 +30,7 @@
 		<property name="fileEncoding" value="utf-8" />
 	</bean>
 	
+	<!--  <import resource="classpath*:spring-test-proxy.xml"/>-->
 	<import resource="classpath*:spring-log-init.xml"/>
 	<import resource="classpath*:spring-trace-init.xml"/>
 	<import resource="classpath*:spring-core-aop.xml" />

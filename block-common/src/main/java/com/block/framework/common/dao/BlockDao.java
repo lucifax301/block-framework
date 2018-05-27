@@ -1,4 +1,4 @@
-package com.block.framework.core.dao;
+package com.block.framework.common.dao;
 
 import java.util.List;
 
