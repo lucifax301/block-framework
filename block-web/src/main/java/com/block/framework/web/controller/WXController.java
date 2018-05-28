@@ -14,10 +14,12 @@ public abstract class WXController {
 	
 	public abstract String getSecret();
 	
-	public abstract ResultBean getUserInfo(@RequestParam String code)  ;
+	public ResultBean getUserInfo(@RequestParam String code) {
+		return this.doGetUserInfo(code);
+	}
 	
 	
-	public ResultBean doGetUserInfo(String code) {
+	private ResultBean doGetUserInfo(String code) {
 		
 		//通过code换取网页授权access_token
 		String tokenUrl="https://api.weixin.qq.com/sns/oauth2/access_token?appid="+getAppId()+"&secret="+getSecret()+"&code="+code+"&grant_type=authorization_code";
@@ -42,9 +44,11 @@ public abstract class WXController {
 		return r;
 	}
 	
-	public abstract ResultBean geOpenId(@RequestParam String code)  ;
+	public ResultBean getOpenId(@RequestParam String code) {
+		return this.getOpenId(code);
+	}
 	
-	public ResultBean doGetOpenId(String code) {
+	private ResultBean doGetOpenId(String code) {
 		String openId = WXUtil.getOpenId(getAppId(), getSecret(), code);
 		ResultBean r = new ResultBean();
 		r.setResult(openId);
