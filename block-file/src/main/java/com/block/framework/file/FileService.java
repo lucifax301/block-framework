@@ -1,6 +1,6 @@
 package com.block.framework.file;
 
-import java.io.InputStream;
+import java.io.File;
 
 public interface FileService {
 
@@ -12,4 +12,8 @@ public interface FileService {
 	UploadResult updateFile(FileItem fileItem) throws Exception;
 	
 	UploadResult updateImg(FileItem fileItem) throws Exception;
+	
+	UploadResult updateFile(File file) throws Exception;
+	
+	UploadResult updateImg(File file) throws Exception;
 }

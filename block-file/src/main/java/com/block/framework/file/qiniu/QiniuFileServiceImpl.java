@@ -62,4 +62,28 @@ public class QiniuFileServiceImpl implements FileService {
 		return result;
 	}
 
+	@Override
+	public UploadResult updateFile(File file) throws Exception {
+		PutRet ret = QiniuPicUtil.uploadFile(file);
+		System.out.println(file.getAbsolutePath());
+		
+		UploadResult result = new UploadResult();
+		result.setUrl(config.getDomain()+ret.getKey());
+		//result.setPath(config.getDomain()+ret.getKey());
+		return result;
+	}
+
+	@Override
+	public UploadResult updateImg(File file) throws Exception {
+		
+		PutRet ret = QiniuPicUtil.uploadFile(file);;
+		
+		System.out.println(file.getAbsolutePath());
+		
+		UploadResult result = new UploadResult();
+		//result.setPath(config.getDomain()+ret.getKey());
+		result.setUrl(config.getDomain()+ret.getKey());
+		return result;
+	}
+
 }

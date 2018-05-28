@@ -56,4 +56,16 @@ public class LocalFileServiceImpl implements FileService {
 		return result;
 	}
 
+	@Override
+	public UploadResult updateFile(File file) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public UploadResult updateImg(File file) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
