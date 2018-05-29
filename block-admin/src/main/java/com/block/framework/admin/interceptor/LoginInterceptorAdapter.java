@@ -40,7 +40,7 @@ public class LoginInterceptorAdapter extends HandlerInterceptorAdapter {
 		if(devProperties.getDev().equals("0")){
 			AdminUser user0=new AdminUser();
 			user0.setId(22);
-			user0.setUserName("admin");
+			user0.setAccount("admin");
 			user0.setRealName("系统管理员");
 			
 			user0.setRoleId(1);

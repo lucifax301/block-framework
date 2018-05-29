@@ -11,7 +11,7 @@ public class AdminUser extends BuModel implements Serializable{
 	
 	private Integer id;
 
-	private String userName;
+	private String account;
 
 	@JsonIgnore
 	private String password;
@@ -76,18 +76,18 @@ public class AdminUser extends BuModel implements Serializable{
 		this.id = id;
 	}
 
+	
 
 
-
-	public String getUserName() {
-		return userName;
+	public String getAccount() {
+		return account;
 	}
 
 
 
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setAccount(String account) {
+		this.account = account;
 	}
 
 
@@ -349,7 +349,7 @@ public class AdminUser extends BuModel implements Serializable{
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", username='" + userName + '\'' +
+                ", username='" + account + '\'' +
             ", realname='" + realName + '\'' +
             ", dblink='" + super.getDblink() + '\'' +
             '}';

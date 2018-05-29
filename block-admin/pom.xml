@@ -8,6 +8,12 @@
   <artifactId>block-admin</artifactId>
   
   <dependencies>
+  		<dependency>
+			<groupId>com.block</groupId>
+			<artifactId>block-admin-common</artifactId>
+			<version>${project.version}</version>
+			<type>jar</type>
+		</dependency>
 		<dependency>
 			<groupId>com.block</groupId>
 			<artifactId>block-core</artifactId>
