@@ -5,9 +5,11 @@ import javax.servlet.http.HttpSession;
 
 import com.block.framework.common.model.ResultBean;
 
-public abstract class AbstractLogoutController extends AdminController {
+public class AbstractLogoutController extends AdminController {
 
-	public abstract ResultBean logout(HttpServletRequest request) ;
+	public ResultBean logout(HttpServletRequest request) {
+		return doLogout(request);
+	}
 	
 	private ResultBean doLogout(HttpServletRequest request){
 		ResultBean rb = new ResultBean();

@@ -27,7 +27,7 @@ public abstract class AbstractLoginController<U> extends BaseController{
 	public abstract ResultBean dologin(U user,String authcode, Integer isAutoLogin, 
 			HttpServletRequest request,HttpServletResponse response);
 	
-	public abstract void postHandle(ResultBean r,U user,HttpServletRequest request,HttpServletResponse response);
+	public abstract void postHandle(ResultBean r,U user,HttpServletRequest request,HttpServletResponse response) throws Exception;
 	
 	
 	public void storeLoginStatus(HttpServletRequest request,
