@@ -32,6 +32,16 @@ public class FileServiceFactory implements ServiceFactory<FileService>{
 	public FileService getService() {
 		return getService(defaultName);
 	}
+
+
+	public String getDefaultName() {
+		return defaultName;
+	}
+
+
+	public void setDefaultName(String defaultName) {
+		this.defaultName = defaultName;
+	}
 	
 	
 }

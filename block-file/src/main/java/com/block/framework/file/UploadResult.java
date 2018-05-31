@@ -49,6 +49,12 @@ public class UploadResult implements Serializable {
 	public void setMsg(String msg) {
 		this.msg = msg;
 	}
+
+	@Override
+	public String toString() {
+		return "{url:"+url+",path:"+path+",code:"+code+",msg:"+msg+"}";
+	}
+	
 	
 	
 }

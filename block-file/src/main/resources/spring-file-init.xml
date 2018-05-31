@@ -16,6 +16,7 @@
 	http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 	
 	<!--  <context:property-placeholder location="classpath*:*.properties" ignore-unresolvable="true"/>-->
+	<!--  
 	<bean id="fileResources" class="java.util.ArrayList">  
         <constructor-arg>  
         <list>  
@@ -23,13 +24,32 @@
         </list>  
         </constructor-arg>  
     </bean>  
+    -->
+    <bean id="fileResources"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath*:qiniu.properties</value>
+				
+			</list>
+		</property>
+		<property name="fileEncoding" value="utf-8" />
+	</bean>
 	
 	<bean id="qiniuConfig" class="com.block.framework.file.qiniu.QiniuConfig">
         
-        <property name="bucklet" value="${wx.pay.certLocalPath}"/>
-        <property name="ak" value="${wx.pay.certPassword}"/>
-        <property name="sk" value="${wx.pay.useThreadToDoReport}"/>
-        <property name="domain" value="${wx.pay.notifyUrl}"/>
+        <property name="bucklet" value="${file.qiniu.bucklet}"/>
+        <property name="ak" value="${file.qiniu.ak}"/>
+        <property name="sk" value="${file.qiniu.sk}"/>
+        <property name="domain" value="${file.qiniu.domain}"/>
+        
+    </bean>
+    
+    <bean id="localConfig" class="com.block.framework.file.local.LocalConfig">
+        
+        <property name="domain" value=""/>
+        <property name="path" value=""/>
+        <property name="acceptSuffix" value=""/>
         
     </bean>
 	
