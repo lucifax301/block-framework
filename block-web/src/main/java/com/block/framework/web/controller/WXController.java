@@ -18,6 +18,11 @@ public abstract class WXController {
 		return this.doGetUserInfo(code);
 	}
 	
+	/**
+	 * 可以参考文档
+	 * https://www.w3cschool.cn/weixinkaifawendang/pdja1qcy.html
+	 * 
+	 */
 	
 	private ResultBean doGetUserInfo(String code) {
 		
@@ -27,6 +32,19 @@ public abstract class WXController {
 		JSONObject json= JSON.parseObject(response);
 		String access_token="";
 		String oppenId="";
+		/**
+		 * { "access_token":"ACCESS_TOKEN",    
+
+			 "expires_in":7200,    
+			
+			 "refresh_token":"REFRESH_TOKEN",    
+			
+			 "openid":"OPENID",    
+			
+			 "scope":"SCOPE" }
+			 
+			  {"errcode":40029,"errmsg":"invalid code"} 
+		 */
 		if(json.containsKey("access_token")){
 			access_token=json.getString("access_token");
 			oppenId=json.getString("openid");
@@ -38,6 +56,33 @@ public abstract class WXController {
 		//拉取用户信息
     	String userInfoUrl = "https://api.weixin.qq.com/sns/userinfo?access_token="+access_token+"&openid="+oppenId+"&lang=zh_CN" ;
     	String infoResponse= HttpUtil.doGet(userInfoUrl, "utf-8");
+    	/**
+    	 * 正确时返回的JSON数据包如下：
+
+			{    "openid":" OPENID",  
+			
+			 " nickname": NICKNAME,   
+			
+			 "sex":"1",   
+			
+			 "province":"PROVINCE"   
+			
+			 "city":"CITY",   
+			
+			 "country":"COUNTRY",    
+			
+			 "headimgurl":    "http://wx.qlogo.cn/mmopen/g3MonUZtNHkdmzicIlibx6iaFqAc56vxLSUfpb6n5WKSYVY0ChQKkiaJSgQ1dZuTOgvLLrhJbERQQ
+			
+			4eMsv84eavHiaiceqxibJxCfHe/46",  
+			
+			"privilege":[ "PRIVILEGE1" "PRIVILEGE2"     ],    
+			
+			 "unionid": "o6_bmasdasdsad6_2sgVt7hMZOPfL" 
+			
+			} 
+			
+			{"errcode":40003,"errmsg":" invalid openid "}
+    	 */
 		JSONObject infoJson= JSON.parseObject(infoResponse);
 		ResultBean r = new ResultBean();
 		r.setResult(infoJson);
