@@ -5,12 +5,16 @@ import java.io.File;
 import org.json.JSONException;
 
 import com.block.framework.common.util.StringUtil;
+import com.google.gson.Gson;
 import com.qiniu.api.auth.AuthException;
 import com.qiniu.api.auth.digest.Mac;
 import com.qiniu.api.io.IoApi;
 import com.qiniu.api.io.PutExtra;
 import com.qiniu.api.io.PutRet;
 import com.qiniu.api.rs.PutPolicy;
+import com.qiniu.http.Response;
+import com.qiniu.storage.UploadManager;
+import com.qiniu.storage.model.DefaultPutRet;
 import com.qiniu.util.Auth;
 
 public class QiniuPicUtil {
@@ -73,6 +77,12 @@ public class QiniuPicUtil {
 
         // 上传文件
         PutRet ret = IoApi.putFile(uptoken, null, file.getAbsolutePath(), extra);
+//        Configuration cfg = new Configuration(Zone.zone0());
+//        //...其他参数参考类注释
+//        UploadManager uploadManager = new UploadManager(cfg);
+//        Response response = uploadManager.put(localFilePath, key, upToken);
+//        //解析上传成功的结果
+//        DefaultPutRet putRet = new Gson().fromJson(response.bodyString(), DefaultPutRet.class);
 
         return ret;
 
