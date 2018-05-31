@@ -27,7 +27,7 @@ public class TestFile {
 		File file=new File("f:\\test1.jpg");
 		FileInputStream in = new FileInputStream(file);
 		item.setInput(in);
-		item.setFileName("test1");
+		//item.setFileName("test1");
 		item.setSuffix(".jpg");
 		System.out.println( service.updateImg(file));
 		in.close();

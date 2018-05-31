@@ -65,6 +65,7 @@ public class QiniuFileServiceImpl implements FileService {
 	@Override
 	public UploadResult updateFile(File file) throws Exception {
 		PutRet ret = QiniuPicUtil.uploadFile(file);
+		System.out.println("ret:"+ret);
 		System.out.println(file.getAbsolutePath());
 		
 		UploadResult result = new UploadResult();
@@ -77,7 +78,7 @@ public class QiniuFileServiceImpl implements FileService {
 	public UploadResult updateImg(File file) throws Exception {
 		
 		PutRet ret = QiniuPicUtil.uploadFile(file);;
-		
+		System.out.println("ret:"+ret);
 		System.out.println(file.getAbsolutePath());
 		
 		UploadResult result = new UploadResult();

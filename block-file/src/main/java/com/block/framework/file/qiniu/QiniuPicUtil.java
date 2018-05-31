@@ -15,9 +15,13 @@ import com.qiniu.util.Auth;
 
 public class QiniuPicUtil {
 
-	private final static String BUCKET_PUBLIC = "liliyun";
-	private final static String AK = "wTZfpMov09_Pvgpzt01kVbTGoFKMcMf2CUmYs5n2";
-	private final static String SK = "CzQMFHoGeNOVuF_0sG96oFzrQtVdRx25-aQrudp1";	
+//	private final static String BUCKET_PUBLIC = "liliyun";
+//	private final static String AK = "wTZfpMov09_Pvgpzt01kVbTGoFKMcMf2CUmYs5n2";
+//	private final static String SK = "CzQMFHoGeNOVuF_0sG96oFzrQtVdRx25-aQrudp1";	
+//	private final static String DOMAIN = "http://7xnvu2.com1.z0.glb.clouddn.com/";
+	private final static String BUCKET_PUBLIC = "block";
+	private final static String AK = "PTItNpj94aCURrMY4wGrj2aEo_Rq0ah4hkwBKuZo";
+	private final static String SK = "uzqUtaJAon3qMcVJUvH_lfh-VkFVR00BrkGx-gM4";	
 	private final static String DOMAIN = "http://7xnvu2.com1.z0.glb.clouddn.com/";
 	
 	static Auth auth = Auth.create(AK, SK);
