@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -231,8 +232,17 @@ public class StringUtil {
         }
         return tuofeng;
     }
-    public static String getOrderId(){
+    public static String genOrderId(){
     	return UUID.randomUUID().toString().replaceAll("-", "");
+    }
+    
+    static AtomicInteger integer=new AtomicInteger(0);
+    static java.text.SimpleDateFormat format=new java.text.SimpleDateFormat("yyyyMMddHHmmss");
+    
+    public static String genTimeOrderId(){
+    	if(integer.get()>100) integer.set(0);
+    	String orderid=format.format(new Date())+System.currentTimeMillis()+integer.incrementAndGet();
+    	return orderid;
     }
     
     public static String arrayToStr(String array[]){

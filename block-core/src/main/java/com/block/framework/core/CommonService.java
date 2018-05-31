@@ -33,6 +33,18 @@ public class CommonService {
 		return rb;
 	}
 	
+	public ResultBean buildSuccess(){
+		ResultBean rb = new ResultBean();
+		return rb;
+	}
+	
+	public ResultBean buildError(int code,String msg){
+		ResultBean rb = new ResultBean();
+		rb.setCode(code);
+		rb.setMsg(msg);
+		return rb;
+	}
+	
 	public ResultBean getResult(){
 		return BlockCacheObjectFactory.<ResultBean>getObject(ResultBean.class);
 	}

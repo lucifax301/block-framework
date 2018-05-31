@@ -83,6 +83,7 @@ public abstract class WXController {
 			
 			{"errcode":40003,"errmsg":" invalid openid "}
     	 */
+    	System.out.println("infoResponse:"+infoResponse);
 		JSONObject infoJson= JSON.parseObject(infoResponse);
 		ResultBean r = new ResultBean();
 		r.setResult(infoJson);
