@@ -90,7 +90,7 @@ public abstract class WXController {
 	}
 	
 	public ResultBean getOpenId(@RequestParam String code) {
-		return this.getOpenId(code);
+		return this.doGetOpenId(code);
 	}
 	
 	private ResultBean doGetOpenId(String code) {

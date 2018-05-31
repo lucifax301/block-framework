@@ -1,6 +1,7 @@
 package com.block.framework.common.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Map;
 
 import org.apache.commons.beanutils.BeanMap;
@@ -15,23 +16,25 @@ public class BaseModel implements Serializable {
 
 	private Integer muid;
 
-	private long ctime;
+	private Date ctime;
 
-	private long mtime;
+	private Date mtime;
 
-	public long getCtime() {
+	
+
+	public Date getCtime() {
 		return ctime;
 	}
 
-	public void setCtime(long ctime) {
+	public void setCtime(Date ctime) {
 		this.ctime = ctime;
 	}
 
-	public long getMtime() {
+	public Date getMtime() {
 		return mtime;
 	}
 
-	public void setMtime(long mtime) {
+	public void setMtime(Date mtime) {
 		this.mtime = mtime;
 	}
 
