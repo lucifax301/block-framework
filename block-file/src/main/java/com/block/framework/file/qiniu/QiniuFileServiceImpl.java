@@ -12,6 +12,7 @@ import com.block.framework.file.FileItem;
 import com.block.framework.file.FileService;
 import com.block.framework.file.UploadResult;
 import com.qiniu.api.io.PutRet;
+import com.qiniu.storage.model.DefaultPutRet;
 
 //@Service
 public class QiniuFileServiceImpl implements FileService {
@@ -77,13 +78,13 @@ public class QiniuFileServiceImpl implements FileService {
 	@Override
 	public UploadResult updateImg(File file) throws Exception {
 		
-		PutRet ret = QiniuPicUtil.uploadFile(file);;
-		System.out.println("ret:"+ret);
+		DefaultPutRet ret = QiniuPicUtil.uploadFileOverride(file);;
+		System.out.println("ret key:"+ret.key+" hash:"+ret.hash);
 		System.out.println(file.getAbsolutePath());
 		
 		UploadResult result = new UploadResult();
 		//result.setPath(config.getDomain()+ret.getKey());
-		result.setUrl(config.getDomain()+ret.getKey());
+		result.setUrl(config.getDomain()+ret.key);
 		return result;
 	}
 

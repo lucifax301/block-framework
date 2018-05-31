@@ -24,7 +24,7 @@ public class TestFile {
     public void testUpload() throws Exception { 
 		FileService service = facotory.getService("qiniu");
 		FileItem item =new FileItem();
-		File file=new File("f:\\test1.jpg");
+		File file=new File("f:\\2763042.jpg");
 		FileInputStream in = new FileInputStream(file);
 		item.setInput(in);
 		//item.setFileName("test1");
