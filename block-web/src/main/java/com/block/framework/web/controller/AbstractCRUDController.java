@@ -32,12 +32,17 @@ public abstract class AbstractCRUDController<T,S> extends BaseController {
 	}
 	
 	public ResultBean listPage(T model,HttpServletRequest request,HttpServletResponse response) {
+		return this.buildListResult(getService(getCls()).listPage(model));
+		//return getService(getCls()).listPage(model);
+	}
+	
+	public ResultBean list(T model,HttpServletRequest request,HttpServletResponse response) {
 		return this.buildListResult(getService(getCls()).list(model));
 		//return getService(getCls()).listPage(model);
 	}
 	
 	public ResultBean get(T model,HttpServletRequest request,HttpServletResponse response) {
-		return this.buildResult(getService(getCls()).getOne(model));
+		return this.buildResult(getService(getCls()).get(model));
 		//return (T)getService(getCls()).getOne(model);
 	}
 	

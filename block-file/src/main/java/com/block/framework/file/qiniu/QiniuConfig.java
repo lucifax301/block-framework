@@ -1,5 +1,7 @@
 package com.block.framework.file.qiniu;
 
+import javax.annotation.PostConstruct;
+
 public class QiniuConfig {
 
 //	private String bucklet = "liliyun";
@@ -10,6 +12,11 @@ public class QiniuConfig {
 	private String ak ;
 	private String sk ;	
 	private String domain ;
+	
+	private String zone;
+	
+	private String localDir;
+	
 	public String getBucklet() {
 		return bucklet;
 	}
@@ -34,6 +41,30 @@ public class QiniuConfig {
 	public void setDomain(String domain) {
 		this.domain = domain;
 	}
+	public String getZone() {
+		return zone;
+	}
+	public void setZone(String zone) {
+		this.zone = zone;
+	}
 	
 	
+	public String getLocalDir() {
+		return localDir;
+	}
+	public void setLocalDir(String localDir) {
+		this.localDir = localDir;
+	}
+
+
+	private static QiniuConfig config = null;
+	
+	@PostConstruct 
+	public void init() { 
+		config = this;
+	}
+	
+	public static QiniuConfig getConfig(){
+		return config;
+	}
 }

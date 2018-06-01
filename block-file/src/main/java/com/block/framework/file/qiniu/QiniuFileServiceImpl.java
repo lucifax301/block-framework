@@ -46,31 +46,32 @@ public class QiniuFileServiceImpl implements FileService {
 		String fileName = fileItem.getFileName();
 		if(fileName==null)
 			fileName = timestamp.toString() + random.toString();
-		File file = new File(fileName+fileItem.getSuffix());
+		String tempFilePath = config.getLocalDir()+fileName+fileItem.getSuffix();
+		File file = new File(tempFilePath);
 		FileUtils.copyInputStreamToFile(fileItem.getInput(), file);
-		PutRet ret = null;
+		DefaultPutRet ret = null;
 		if(fileItem.getFileName()==null){
-			ret = QiniuPicUtil.uploadFileWithRandomName(file);
+			ret = QiniuPicUtil.uploadFileWithRandomNameNew(file);
 		}else{
-			ret = QiniuPicUtil.uploadFile(file);
+			ret = QiniuPicUtil.uploadFileNew(file);
 		}
 		
 		System.out.println(file.getAbsolutePath());
 		file.delete();
 		UploadResult result = new UploadResult();
 		//result.setPath(config.getDomain()+ret.getKey());
-		result.setUrl(config.getDomain()+ret.getKey());
+		result.setUrl(config.getDomain()+ret.key);
 		return result;
 	}
 
 	@Override
 	public UploadResult updateFile(File file) throws Exception {
-		PutRet ret = QiniuPicUtil.uploadFile(file);
+		DefaultPutRet ret = QiniuPicUtil.uploadFileNew(file);
 		System.out.println("ret:"+ret);
 		System.out.println(file.getAbsolutePath());
 		
 		UploadResult result = new UploadResult();
-		result.setUrl(config.getDomain()+ret.getKey());
+		result.setUrl(config.getDomain()+ret.key);
 		//result.setPath(config.getDomain()+ret.getKey());
 		return result;
 	}
@@ -78,7 +79,7 @@ public class QiniuFileServiceImpl implements FileService {
 	@Override
 	public UploadResult updateImg(File file) throws Exception {
 		
-		DefaultPutRet ret = QiniuPicUtil.uploadFileOverride(file);;
+		DefaultPutRet ret = QiniuPicUtil.uploadFileNew(file);;
 		System.out.println("ret key:"+ret.key+" hash:"+ret.hash);
 		System.out.println(file.getAbsolutePath());
 		

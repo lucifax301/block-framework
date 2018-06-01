@@ -66,6 +66,12 @@ public class BaseController {
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));  
 	} 
 	
+	public <T> ResultBean buildListResult(PageInfo<T> page){
+		ResultBean rb = new ResultBean();
+		rb.setResult(page);
+		return rb;
+	}
+	
 	public <T> ResultBean buildListResult(List<T> list){
 		ResultBean rb = new ResultBean();
 		rb.setResult(new PageInfo<T>(list));

@@ -1,5 +1,7 @@
 package com.block.framework.file.local;
 
+import javax.annotation.PostConstruct;
+
 public class LocalConfig {
 
 	private String domain;
@@ -36,5 +38,12 @@ public class LocalConfig {
 		this.acceptSuffix = acceptSuffix;
 	}
 	
-	
+	private static LocalConfig config;
+	@PostConstruct 
+	public void init(){
+		config = this;
+	}
+	public static LocalConfig getConfig(){
+		return config;
+	}
 }

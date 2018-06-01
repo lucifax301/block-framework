@@ -13,6 +13,8 @@ public interface CRUDService<T> {
 	
 	ResultBean delete(T model);
 	
+	ResultBean get(T model);
+	
 	PageInfo<T> listPage(T model);
 	
 	List<T> list(T model);

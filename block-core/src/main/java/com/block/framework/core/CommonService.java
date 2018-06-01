@@ -34,8 +34,9 @@ public class CommonService {
 	}
 	
 	public ResultBean buildSuccess(){
-		ResultBean rb = new ResultBean();
-		return rb;
+//		ResultBean rb = new ResultBean();
+//		return rb;
+		return BlockCacheObjectFactory.<ResultBean>getObject(ResultBean.class);
 	}
 	
 	public ResultBean buildError(int code,String msg){

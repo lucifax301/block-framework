@@ -328,7 +328,6 @@
   	<module>block-file</module>
   	<module>block-search</module>
   	<module>block-pay-web</module>
-  	<module>block-admin-api</module>
   	<module>block-admin-common</module>
   </modules>
 </project>

@@ -30,7 +30,7 @@
 		<property name="locations">
 			<list>
 				<value>classpath*:qiniu.properties</value>
-				
+				<value>classpath*:localfile.properties</value>
 			</list>
 		</property>
 		<property name="fileEncoding" value="utf-8" />
@@ -42,14 +42,15 @@
         <property name="ak" value="${file.qiniu.ak}"/>
         <property name="sk" value="${file.qiniu.sk}"/>
         <property name="domain" value="${file.qiniu.domain}"/>
-        
+        <property name="zone" value="${file.qiniu.zone}"/>
+        <property name="localDir" value="${file.qiniu.localDir}"/>
     </bean>
     
     <bean id="localConfig" class="com.block.framework.file.local.LocalConfig">
         
-        <property name="domain" value=""/>
-        <property name="path" value=""/>
-        <property name="acceptSuffix" value=""/>
+        <property name="domain" value="${file.local.domain}"/>
+        <property name="path" value="${file.local.path}"/>
+        <property name="acceptSuffix" value="${file.local.acceptSuffix}"/>
         
     </bean>
 	

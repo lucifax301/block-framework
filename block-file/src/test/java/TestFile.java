@@ -22,14 +22,23 @@ public class TestFile {
 	
 	@Test
     public void testUpload() throws Exception { 
+//		FileService service = facotory.getService("qiniu");
+//		FileItem item =new FileItem();
+//		File file=new File("e:\\123.jpg");
+//		FileInputStream in = new FileInputStream(file);
+//		item.setInput(in);
+//		//item.setFileName("test1");
+//		item.setSuffix(".jpg");
+//		System.out.println( service.updateImg(file));
+//		in.close();
 		FileService service = facotory.getService("qiniu");
 		FileItem item =new FileItem();
-		File file=new File("f:\\2763042.jpg");
+		File file=new File("e:\\456.jpg");
 		FileInputStream in = new FileInputStream(file);
 		item.setInput(in);
-		//item.setFileName("test1");
+		item.setFileName("test1");
 		item.setSuffix(".jpg");
-		System.out.println( service.updateImg(file));
+		System.out.println( service.updateImg(item));
 		in.close();
 	}
 }

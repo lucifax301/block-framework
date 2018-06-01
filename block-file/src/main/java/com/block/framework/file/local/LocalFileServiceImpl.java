@@ -33,7 +33,7 @@ public class LocalFileServiceImpl implements FileService {
 		
 		UploadResult result = new UploadResult();
 		result.setUrl(config.getDomain()+fullName);
-		result.setPath(config.getDomain()+fullName);
+		result.setPath(config.getPath()+fullName);
 		return result;
 	}
 
