@@ -1,0 +1,2 @@
+使用block-file需要在spring配置里引入spring-file-init.xml ，然后在使用工程里加入2个配置文件
+参考config目录
