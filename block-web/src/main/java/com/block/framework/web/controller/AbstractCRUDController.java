@@ -17,6 +17,16 @@ public abstract class AbstractCRUDController<T,S> extends BaseController {
 	@Autowired
 	ServiceMediator serviceMediator;
 	
+	
+	
+	public ServiceMediator getServiceMediator() {
+		return serviceMediator;
+	}
+
+	public void setServiceMediator(ServiceMediator serviceMediator) {
+		this.serviceMediator = serviceMediator;
+	}
+
 	public abstract Class<S> getCls();
 	
 	public ResultBean add(T model,HttpServletRequest request,HttpServletResponse response) {
