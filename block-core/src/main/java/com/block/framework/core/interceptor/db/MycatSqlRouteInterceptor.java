@@ -23,12 +23,12 @@ import com.block.framework.core.context.RequestContext;
 
 
 /**
- * sql路由拦截器
+ * mycat sql路由拦截器
  * @author lilixc
  *
  */
 @Intercepts(@Signature(type = StatementHandler.class, method = "prepare", args = {Connection.class}))
-public class SqlRouteInterceptor implements Interceptor{
+public class MycatSqlRouteInterceptor implements Interceptor{
 	
 	public static final String SQLKEY = "delegate.boundSql.sql";
 	public static final String PREFIX = "/*!mycat: schema = %s */ %s";

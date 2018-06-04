@@ -24,6 +24,9 @@ public class InnerTrace {
 	
 	private String ip;
 	
+	//自定义， 在controller里用 web_request,在普通方法里用service
+	private String serviceType;
+	
 	public InnerTrace(){
 		
 	}

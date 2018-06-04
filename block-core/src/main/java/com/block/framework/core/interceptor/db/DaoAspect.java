@@ -10,6 +10,7 @@ import org.aspectj.lang.reflect.MethodSignature;
 
 import com.block.framework.common.annotation.DBRoute;
 
+@Deprecated
 public class DaoAspect {
 
 	 
