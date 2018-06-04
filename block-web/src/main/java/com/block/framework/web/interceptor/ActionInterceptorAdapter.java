@@ -7,6 +7,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.block.framework.core.context.RequestContext;
+import com.block.framework.core.trace.InnerTrace;
+import com.block.framework.core.trace.Trace;
 import com.block.framework.core.trace.TraceUtil;
 
 /**
@@ -24,7 +26,9 @@ public class ActionInterceptorAdapter extends HandlerInterceptorAdapter {
 		String traceId = TraceUtil.createTraceIdString();
 		rc.setTraceId(traceId);
 		rc.setIp(request.getRemoteAddr());
-		
+		InnerTrace innerTrace = Trace.createTrace("webrequest");
+		innerTrace.setTraceId(traceId);
+		innerTrace.setIp(rc.getIp());
 		return true;
 	}
 	
@@ -40,5 +44,6 @@ public class ActionInterceptorAdapter extends HandlerInterceptorAdapter {
             throws Exception { 
 		System.out.println("###### clear RequestContext");
 		RequestContext.set(null);
+		Trace.endTrace();
     } 
 }

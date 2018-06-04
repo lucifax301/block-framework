@@ -58,7 +58,8 @@ public class Trace {
 			current.set(parent);
 			innerTrace.setNanoEndTime(System.nanoTime());
 			innerTrace.setDuration(innerTrace.getNanoStartTime()-innerTrace.getNanoEndTime());
-			innerTrace.close();
+			//innerTrace.close();
+			close(innerTrace);
 			return innerTrace;
 		}
 		return null;
@@ -66,7 +67,7 @@ public class Trace {
 	
 	private static TraceReporterFactory traceReporterFactory=TraceReporterFactory.instance();
 	
-	public static void close(InnerTrace innerTrace){
+	private static void close(InnerTrace innerTrace){
 		traceReporterFactory.getReporter().report(innerTrace);
 	}
 }

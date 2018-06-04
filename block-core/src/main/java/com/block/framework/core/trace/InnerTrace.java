@@ -1,10 +1,14 @@
 package com.block.framework.core.trace;
 
-public class InnerTrace {
+import com.block.framework.common.model.BuModel;
+
+public class InnerTrace extends BuModel{
 
 	public static final String TRACE_ID = "trace_id";
 	public static final String SPAN_ID = "span_id";
 	public static final String TRACE_ORDER = "trace_order";
+	
+	private int id;
 	
 	private String traceId;
 	
@@ -27,6 +31,8 @@ public class InnerTrace {
 	//自定义， 在controller里用 web_request,在普通方法里用service
 	private String serviceType;
 	
+	
+	
 	public InnerTrace(){
 		
 	}
@@ -38,6 +44,16 @@ public class InnerTrace {
 		this.methodName=builder.methodName;
 		this.ip=builder.ip;
 		
+	}
+
+	
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getSpanId() {

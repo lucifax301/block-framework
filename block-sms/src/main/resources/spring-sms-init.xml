@@ -15,14 +15,24 @@
 	http://code.alibabatech.com/schema/dubbo 
 	http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 	
-	<!--  <context:property-placeholder location="classpath*:*.properties" ignore-unresolvable="true"/>-->
+	<!--  
 	<bean id="fileResources" class="java.util.ArrayList">  
         <constructor-arg>  
         <list>  
             <value>classpath*:sms-ali.properties</value>  
         </list>  
         </constructor-arg>  
-    </bean>  
+    </bean>
+    -->  
+    <bean id="smsConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath*:sms-ali.properties</value>
+			</list>
+		</property>
+		<property name="fileEncoding" value="utf-8" />
+	</bean>
 	
 	<bean id="aliSmsConfig" class="com.block.framework.sms.alibaba.SmsConfig">
         <property name="accessKeyId" value="${sms.ali.accessKeyId}"/>

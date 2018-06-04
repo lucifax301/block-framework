@@ -18,8 +18,11 @@
 	<bean id="daoInterceptor" class="com.block.framework.core.interceptor.db.DaoInterceptor"></bean>
 	
 	<aop:config>
-		<aop:pointcut expression="execution(public * com.block.*.*.mapper.*.*(..))" id="daopointcut"/>
+		<!--  <aop:pointcut expression="execution(public * com.block.*.*.mapper.*.*(..)) || @within(com.block.framework.common.annotation.Dao)" id="daopointcut"/>-->
+		<aop:pointcut expression="execution(public * com.block.*.*.mapper.*.*(..)) || execution(public * com.block.framework.core.trace.mapper.*.*(..))" id="daopointcut"/>
 		<aop:advisor advice-ref="daoInterceptor" pointcut-ref="daopointcut"/>
+		
 	</aop:config>
+	
 	
 </beans>
