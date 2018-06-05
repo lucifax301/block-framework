@@ -1,0 +1,1 @@
+如果走hessian非dubbo协议，就会牺牲很多dubbo context高级特性，无法在节点传递context

@@ -13,7 +13,7 @@ public class Trace {
 	}
 	
 	public static InnerTrace createTrace(String name){
-		long start = System.nanoTime();
+		long start = System.currentTimeMillis();
 		InnerTrace innerTrace = current.get();
 		if(innerTrace==null){
 			innerTrace = new InnerTrace();
@@ -43,7 +43,9 @@ public class Trace {
 		innerTrace.setTraceId(parent.getTraceId());
 		innerTrace.setMethodName(name);
 		innerTrace.setOrder(parent.getOrder()+1);
-		long start = System.nanoTime();
+		//long start = System.nanoTime();
+		//不用毫微秒 ，用毫秒
+		long start = System.currentTimeMillis();
 		innerTrace.setNanoStartTime(start);
 		String spanId = TraceUtil.createTraceIdString();
 		innerTrace.setSpanId(spanId);
@@ -56,7 +58,7 @@ public class Trace {
 		if(innerTrace!=null){
 			InnerTrace parent = innerTrace.getParent();
 			current.set(parent);
-			innerTrace.setNanoEndTime(System.nanoTime());
+			innerTrace.setNanoEndTime(System.currentTimeMillis());
 			innerTrace.setDuration(innerTrace.getNanoStartTime()-innerTrace.getNanoEndTime());
 			//innerTrace.close();
 			close(innerTrace);

@@ -1,9 +1,10 @@
 package com.block.framework.core.context;
 
+import java.io.Serializable;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class RequestContext {
+public class RequestContext implements Serializable{
 
 	private String traceId;
 	

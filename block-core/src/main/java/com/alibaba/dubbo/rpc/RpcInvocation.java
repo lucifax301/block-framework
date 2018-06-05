@@ -8,6 +8,7 @@ import java.util.Map;
 
 import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.common.URL;
+import com.block.framework.core.dubbo.BlockContextable;
 import com.block.framework.core.dubbo.BlockInvokeContext;
 
 
@@ -17,7 +18,7 @@ import com.block.framework.core.dubbo.BlockInvokeContext;
  * @serial Don't change the class name and properties.
  * @author qian.lei
  */
-public class RpcInvocation implements Invocation, Serializable {
+public class RpcInvocation implements Invocation, Serializable,BlockContextable {
 
     private static final long serialVersionUID = -4355285085441097045L;
 
@@ -37,13 +38,13 @@ public class RpcInvocation implements Invocation, Serializable {
     }
     
     
-
+    @Override
     public BlockInvokeContext getInvokeContext() {
 		return invokeContext;
 	}
 
 
-
+    @Override
 	public void setInvokeContext(BlockInvokeContext invokeContext) {
 		this.invokeContext = invokeContext;
 	}

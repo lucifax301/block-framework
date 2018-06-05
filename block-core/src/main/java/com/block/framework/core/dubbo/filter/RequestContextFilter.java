@@ -11,6 +11,7 @@ import com.alibaba.dubbo.rpc.RpcException;
 import com.alibaba.dubbo.rpc.RpcInvocation;
 import com.block.framework.core.context.RequestContext;
 import com.block.framework.core.dubbo.BlockInvokeContext;
+import com.block.framework.core.dubbo.RpcResultWrapper;
 
 
 /**
@@ -64,7 +65,8 @@ public class RequestContextFilter implements Filter {
 		BlockInvokeContext ctx = takeContext(invocation);
 		try{
 			setupProviderSideContext(ctx);
-			return invoker.invoke(invocation);
+			return new RpcResultWrapper(invoker.invoke(invocation),ctx);
+			//return invoker.invoke(invocation);
 		}catch(Throwable e){
 			throw new RpcException(e);
 		}finally{
@@ -73,7 +75,11 @@ public class RequestContextFilter implements Filter {
 	}
 
 	private void  setupProviderSideContext(BlockInvokeContext ctx){
-		RequestContext rc = RequestContext.get();
-		RequestContext.set(rc);
+		if(ctx!=null){
+			RequestContext rc = ctx.getRequestContext();
+			RequestContext.set(rc);
+		}else{
+			RequestContext.create();
+		}
 	}
 }

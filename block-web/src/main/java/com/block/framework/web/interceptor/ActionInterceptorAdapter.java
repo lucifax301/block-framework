@@ -26,7 +26,9 @@ public class ActionInterceptorAdapter extends HandlerInterceptorAdapter {
 		String traceId = TraceUtil.createTraceIdString();
 		rc.setTraceId(traceId);
 		rc.setIp(request.getRemoteAddr());
-		InnerTrace innerTrace = Trace.createTrace("webrequest");
+		String name = request.getRequestURI().toString();
+		InnerTrace innerTrace = Trace.createTrace(name);
+		innerTrace.setServiceType("webrequest");
 		innerTrace.setTraceId(traceId);
 		innerTrace.setIp(rc.getIp());
 		return true;

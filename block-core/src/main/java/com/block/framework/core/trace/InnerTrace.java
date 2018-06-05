@@ -33,6 +33,14 @@ public class InnerTrace extends BuModel{
 	
 	
 	
+	public String getServiceType() {
+		return serviceType;
+	}
+
+	public void setServiceType(String serviceType) {
+		this.serviceType = serviceType;
+	}
+
 	public InnerTrace(){
 		
 	}
