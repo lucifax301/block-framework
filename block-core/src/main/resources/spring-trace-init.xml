@@ -34,7 +34,7 @@
 	<bean id="asyncReporter" class="com.block.framework.core.trace.reporter.AsyncDBTraceReporter"/>
 	
 	<bean id="traceReporterFactory" class="com.block.framework.core.trace.TraceReporterFactory">
-		<property name="defaultReporter" value="sync"/>
+		<property name="defaultReporter" value="async"/>
 		<property name="reporters">
             <map>
                 <entry key="sync" value-ref="syncReporter" />

@@ -1,7 +1,5 @@
 package com.block.framework.web.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -10,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.block.framework.common.model.ResultBean;
 import com.block.framework.common.service.CRUDService;
 import com.block.framework.core.ServiceMediator;
-import com.github.pagehelper.PageInfo;
 
 public abstract class AbstractCRUDController<T,S> extends BaseController {
 
