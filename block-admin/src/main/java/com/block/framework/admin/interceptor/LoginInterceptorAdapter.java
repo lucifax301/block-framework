@@ -9,7 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -25,7 +26,9 @@ import com.block.framework.core.context.RequestContext;
  */
 public class LoginInterceptorAdapter extends HandlerInterceptorAdapter {
 
-	protected final Logger access = Logger.getLogger(this.getClass());
+	//protected final Logger access = Logger.getLogger(this.getClass());
+	
+	private static Logger logger = LoggerFactory.getLogger(LoginInterceptorAdapter.class);
 	
 	@Resource(name="devProperties")
 	private DevProperties devProperties;
@@ -33,11 +36,13 @@ public class LoginInterceptorAdapter extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
+		logger.debug("#########login preHandle");
 		String url = request.getRequestURL().toString();
 		
 		HttpSession session = request.getSession();
 		
 		if(devProperties.getDev().equals("0")){
+			logger.warn("###############dev model");
 			AdminUser user0=new AdminUser();
 			user0.setId(22);
 			user0.setAccount("admin");
@@ -67,14 +72,16 @@ public class LoginInterceptorAdapter extends HandlerInterceptorAdapter {
 	public void postHandle(    
             HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView)    
             throws Exception {    
-		System.out.println("postHandle");
+		logger.debug("#########login postHandle");
+		//System.out.println("postHandle");
     }   
 	
 	@Override
 	public void afterCompletion(    
             HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)    
             throws Exception { 
-		System.out.println("afterCompletion");
+		logger.debug("#########login afterCompletion");
+		//System.out.println("afterCompletion");
     }  
 	
 	private void printJson(HttpServletResponse response,String msg, Exception ex) {

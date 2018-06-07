@@ -3,6 +3,8 @@ package com.block.framework.web.interceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -16,12 +18,15 @@ import com.block.framework.core.trace.TraceUtil;
  * @author devil
  *
  */
-public class ActionInterceptorAdapter extends HandlerInterceptorAdapter {
+public class TraceInterceptorAdapter extends HandlerInterceptorAdapter {
 
+	private static Logger logger = LoggerFactory.getLogger(TraceInterceptorAdapter.class);
+	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		System.out.println("###### create RequestContext");
+		logger.debug("###### create RequestContext");
+		//System.out.println("###### create RequestContext");
 		RequestContext rc = RequestContext.create();
 		String traceId = TraceUtil.createTraceIdString();
 		rc.setTraceId(traceId);
@@ -44,7 +49,8 @@ public class ActionInterceptorAdapter extends HandlerInterceptorAdapter {
 	public void afterCompletion(    
             HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)    
             throws Exception { 
-		System.out.println("###### clear RequestContext");
+		logger.debug("###### clear RequestContext");
+		//System.out.println("###### clear RequestContext");
 		RequestContext.set(null);
 		Trace.endTrace();
     } 

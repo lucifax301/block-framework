@@ -24,7 +24,7 @@ public class AdminUser extends BuModel implements Serializable{
 
 	//0 commom 1 super
 	private Integer superAdmin;
-
+	//1--启用，0--停用
 	private Integer status;
 	//0 normal 1 deleted
 	private Integer deleted;

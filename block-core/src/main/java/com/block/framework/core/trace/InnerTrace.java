@@ -14,6 +14,8 @@ public class InnerTrace extends BuModel{
 	
 	private String spanId;
 	
+	private String parentSpanId;
+	
 	private int order;
 	
 	private InnerTrace parent;
@@ -31,7 +33,7 @@ public class InnerTrace extends BuModel{
 	//自定义， 在controller里用 web_request,在普通方法里用service
 	private String serviceType;
 	
-	
+	private int step;
 	
 	public String getServiceType() {
 		return serviceType;
@@ -136,6 +138,24 @@ public class InnerTrace extends BuModel{
 		this.parent = parent;
 	}
 	
+	
+	
+	public String getParentSpanId() {
+		return parentSpanId;
+	}
+
+	public void setParentSpanId(String parentSpanId) {
+		this.parentSpanId = parentSpanId;
+	}
+
+	public int getStep() {
+		return step;
+	}
+
+	public void setStep(int step) {
+		this.step = step;
+	}
+
 	public void close(){
 		/**
 		 * send to queue

@@ -4,12 +4,9 @@ import java.lang.reflect.Method;
 import java.util.Date;
 
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.springframework.stereotype.Component;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.block.framework.core.trace.InnerTrace;
 import com.block.framework.core.trace.Trace;
@@ -24,6 +21,8 @@ import com.block.framework.core.trace.Trace;
 //@Component
 public class ServiceInterceptor {
 
+	private static Logger logger = LoggerFactory.getLogger(ServiceInterceptor.class);
+	
 	//拦截所有Servie注解的类的方法
 	//@Pointcut("@within(org.springframework.stereotype.Service)")
 	public void serviceAspect() {
@@ -33,10 +32,10 @@ public class ServiceInterceptor {
 	public void beforeMethod(JoinPoint joinPoint) {
 		MethodSignature methodSignature = (MethodSignature)joinPoint.getSignature();
 		Method method = methodSignature.getMethod();
-		System.out.println("beforeMethod "+method.getName()+" at time:"+new Date());
+		logger.debug("beforeMethod "+method.getName()+" at time:"+new Date());
 		InnerTrace innerTrace =Trace.createTrace(method.getName());
 		//innerTrace.setMethodName(method.getName());
-		System.out.println(innerTrace);
+		//System.out.println(innerTrace);
 	}
 	
 //	@Around("serviceAspect()")
@@ -61,8 +60,9 @@ public class ServiceInterceptor {
     public void afterMethod(JoinPoint joinPoint) {
     	MethodSignature methodSignature = (MethodSignature)joinPoint.getSignature();
 		Method method = methodSignature.getMethod();
-		System.out.println("endMethod "+method.getName()+" at time:"+new Date());
+		logger.debug("endMethod "+method.getName()+" at time:"+new Date());
+		//System.out.println("endMethod "+method.getName()+" at time:"+new Date());
 		InnerTrace innerTrace = Trace.endTrace();
-		System.out.println(innerTrace);
+		
     }
 }

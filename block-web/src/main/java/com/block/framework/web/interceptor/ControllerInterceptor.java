@@ -4,13 +4,9 @@ import java.lang.reflect.Method;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.springframework.stereotype.Component;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.block.framework.common.annotation.ActionDescription;
 import com.block.framework.common.exception.BlockException;
@@ -23,6 +19,8 @@ import com.block.framework.common.exception.BlockException;
 //@Component
 public class ControllerInterceptor {
 
+	private static Logger logger = LoggerFactory.getLogger(ControllerInterceptor.class);
+	
 	//对spring的mapping注解做aop拦截
 	//@Pointcut("@annotation(org.springframework.web.bind.annotation.RequestMapping)")
 	public void controllerAspect() {
@@ -30,19 +28,20 @@ public class ControllerInterceptor {
 
 	//@Before("controllerAspect()")
 	public void before(JoinPoint joinPoint) {
-		System.out.println("controllerAspect 已经记录下操作日志@Before 方法执行前");
+		logger.debug("controllerAspect 已经记录下操作日志@Before 方法执行前");
+		//System.out.println("controllerAspect 已经记录下操作日志@Before 方法执行前");
 		
 	}
 	
 	//@Around("controllerAspect()")
     public Object around(ProceedingJoinPoint pjp) throws Throwable{
-		System.out.println("controllerAspect 已经记录下操作日志@Around 方法执行前");
-		 MethodSignature methodSignature = (MethodSignature)pjp.getSignature();
-		 Method method = methodSignature.getMethod();
+		//System.out.println("controllerAspect 已经记录下操作日志@Around 方法执行前");
+    	logger.debug("controllerAspect 已经记录下操作日志@Around 方法执行前");
+		MethodSignature methodSignature = (MethodSignature)pjp.getSignature();
+		Method method = methodSignature.getMethod();
 		
 		try{
-			
-         return pjp.proceed();
+			return pjp.proceed();
 		}catch(Throwable e){
 			ActionDescription description = (ActionDescription)method.getAnnotation(ActionDescription.class);
 			String error = description!=null?description.error():"";
@@ -55,6 +54,7 @@ public class ControllerInterceptor {
 
     //@After("controllerAspect()")
     public void after() {
-        System.out.println("controllerAspect 已经记录下操作日志@After 方法执行后");
+    	logger.debug("controllerAspect 已经记录下操作日志@After 方法执行后");
+        //System.out.println("controllerAspect 已经记录下操作日志@After 方法执行后");
     }
 }

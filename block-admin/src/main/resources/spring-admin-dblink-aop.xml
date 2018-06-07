@@ -17,14 +17,14 @@
 	
 	
 	
-	<bean id="actionInfoInterceptor" class="com.block.framework.admin.interceptor.ActionInfoInterceptor"></bean>
+	<bean id="dblinkInterceptor" class="com.block.framework.admin.interceptor.DblinkInterceptor"></bean>
 	<aop:config>
-		<aop:pointcut expression="@annotation(org.springframework.web.bind.annotation.RequestMapping)" id="actionInfocut"/>
+		<aop:pointcut expression="@annotation(org.springframework.web.bind.annotation.RequestMapping)" id="dblinkcut"/>
 		
-		<aop:aspect id="actionInfoAspect" ref="actionInfoInterceptor" order="2">
-		<aop:before method="before"  pointcut-ref="actionInfocut"/>
-		<aop:around method="around" pointcut-ref="actionInfocut" />
-		<aop:after method="after" pointcut-ref="actionInfocut"/>
+		<aop:aspect id="dblinkAspect" ref="dbInterceptor" order="3">
+		<aop:before method="before"  pointcut-ref="dblinkcut"/>
+		<aop:around method="around" pointcut-ref="dblinkcut" />
+		<aop:after method="after" pointcut-ref="dblinkcut"/>
 		</aop:aspect>
 	</aop:config>
 </beans>

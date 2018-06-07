@@ -54,6 +54,7 @@ public class Trace {
 	}
 	
 	public static InnerTrace endTrace(){
+		
 		InnerTrace innerTrace = current.get();
 		if(innerTrace!=null){
 			InnerTrace parent = innerTrace.getParent();
@@ -61,7 +62,9 @@ public class Trace {
 			innerTrace.setNanoEndTime(System.currentTimeMillis());
 			innerTrace.setDuration(innerTrace.getNanoStartTime()-innerTrace.getNanoEndTime());
 			//innerTrace.close();
-			close(innerTrace);
+			if(TraceConfig.enableTrace()){
+				close(innerTrace);
+			}
 			return innerTrace;
 		}
 		return null;

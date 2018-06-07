@@ -16,10 +16,6 @@
 	http://www.springframework.org/schema/context 
 	http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 	
-	<bean id="devProperties" class="com.block.framework.admin.util.DevProperties">
-		<property name="dev" value="0" />
-	</bean>
-	
 	<!-- 用户登录验证拦截器-->
  	<mvc:interceptors>
  		

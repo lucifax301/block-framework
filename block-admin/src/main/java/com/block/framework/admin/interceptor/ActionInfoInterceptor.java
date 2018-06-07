@@ -24,7 +24,6 @@ import com.block.framework.common.annotation.RequestAction;
 import com.block.framework.common.model.BaseModel;
 import com.block.framework.common.model.BuModel;
 import com.block.framework.core.constant.CoreConstants;
-import com.block.framework.core.context.RequestContext;
 
 /**
  * controller层获取用户的session信息 ,并把session中数据库信息设置到BaseModel中。
@@ -32,10 +31,9 @@ import com.block.framework.core.context.RequestContext;
  */
 //@Aspect
 //@Component
-public class DblinkInterceptor {
+public class ActionInfoInterceptor {
 
-	private static Logger logger = LoggerFactory.getLogger(DblinkInterceptor.class);
-	
+	private static Logger logger = LoggerFactory.getLogger(ActionInfoInterceptor.class);
 	//对spring的mapping注解做aop拦截
 	//@Pointcut("@annotation(org.springframework.web.bind.annotation.RequestMapping)")
 	public void controllerAspect() {
@@ -43,22 +41,28 @@ public class DblinkInterceptor {
 
 	//@Before("controllerAspect()")
 	public void before(JoinPoint joinPoint) {
-		logger.debug("已经记录下操作日志@Before 方法执行前");
 		//System.out.println("dblink已经记录下操作日志@Before 方法执行前");
+		logger.debug("已经记录下操作日志@Before 方法执行前");
 		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 		HttpSession session = request.getSession();
 		Object [] args = joinPoint.getArgs();
 		MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();  
         Method method = methodSignature.getMethod();
         //Class cls = method.getDeclaringClass();
-        
+        RequestAction requestAction = (RequestAction)method.getAnnotation(RequestAction.class);
 		for (Object o : args) {
 			if (o instanceof BuModel) {
-				//AdminUser user = (AdminUser)session.getAttribute(CoreConstants.USER_SESSION);
-				AdminUser user = RequestContext.getValue(CoreConstants.USER_SESSION);
+				AdminUser user = (AdminUser)session.getAttribute(CoreConstants.USER_SESSION);
+				
 				if (user != null) {
-					((BuModel) o).setDblink(user.getDblink());
 					
+					if(requestAction!=null){
+						if(requestAction.type()==RequestAction.RequestActionType.ADD){
+							((BaseModel) o).setCuid(user.getId());
+						}else if(requestAction.type()==RequestAction.RequestActionType.UPDATE){
+							((BaseModel) o).setMuid(user.getId());
+						}
+					}
 				}
 			}
 		}
