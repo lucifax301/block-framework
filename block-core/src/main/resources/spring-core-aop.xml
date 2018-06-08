@@ -22,7 +22,7 @@
 	<aop:config>
 		<aop:pointcut expression="@within(org.springframework.stereotype.Service)" id="serviceIpointcut"/>
 		
-		<aop:aspect id="serviceAspect" ref="serviceInterceptor">
+		<aop:aspect id="serviceAspect" ref="serviceInterceptor" order="0">
 		<aop:before method="beforeMethod"  pointcut-ref="serviceIpointcut"/>
 		<aop:after method="afterMethod" pointcut-ref="serviceIpointcut"/>
 		</aop:aspect>

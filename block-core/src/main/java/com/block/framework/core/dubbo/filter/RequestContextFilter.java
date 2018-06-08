@@ -9,6 +9,8 @@ import com.alibaba.dubbo.rpc.Result;
 import com.alibaba.dubbo.rpc.RpcContext;
 import com.alibaba.dubbo.rpc.RpcException;
 import com.alibaba.dubbo.rpc.RpcInvocation;
+import com.block.framework.config.RpcModel;
+import com.block.framework.core.constant.CoreConstants;
 import com.block.framework.core.context.RequestContext;
 import com.block.framework.core.dubbo.BlockInvokeContext;
 import com.block.framework.core.dubbo.RpcResultWrapper;
@@ -53,7 +55,8 @@ public class RequestContextFilter implements Filter {
 
 	private BlockInvokeContext setContext(Invocation invocation){
 		BlockInvokeContext ctx = new BlockInvokeContext();
-		ctx.setRequestContext(RequestContext.get());
+		RequestContext rc = RequestContext.get();
+		ctx.setRequestContext(rc);
 		if(ctx.getRequestContext()==null){
 			throw new RpcException("上下文为空，禁止调用");
 		}

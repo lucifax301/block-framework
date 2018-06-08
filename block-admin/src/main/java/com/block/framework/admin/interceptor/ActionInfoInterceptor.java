@@ -23,6 +23,7 @@ import com.block.framework.admin.model.AdminUser;
 import com.block.framework.common.annotation.RequestAction;
 import com.block.framework.common.model.BaseModel;
 import com.block.framework.common.model.BuModel;
+import com.block.framework.config.RpcModel;
 import com.block.framework.core.constant.CoreConstants;
 
 /**
@@ -63,6 +64,11 @@ public class ActionInfoInterceptor {
 							((BaseModel) o).setMuid(user.getId());
 						}
 					}
+					//设置cmsuser信息传递给其他节点
+					if(RpcModel.getModel()==RpcModel.MODEL_WITHOUT_CONTEXT){
+						((BaseModel)o).setExtend(user);
+					}
+					
 				}
 			}
 		}

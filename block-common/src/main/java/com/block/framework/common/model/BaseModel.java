@@ -19,8 +19,18 @@ public class BaseModel implements Serializable {
 	private Date ctime;
 
 	private Date mtime;
+	//实体附加信息，可在 http rpc 携带一些上下文信息
+	private Object extend;
 
 	
+	
+	public Object getExtend() {
+		return extend;
+	}
+
+	public void setExtend(Object extend) {
+		this.extend = extend;
+	}
 
 	public Date getCtime() {
 		return ctime;

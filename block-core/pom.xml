@@ -15,6 +15,12 @@
 			<version>${project.version}</version>
 			<type>jar</type>
 		</dependency>
+		<dependency>
+			<groupId>com.block</groupId>
+			<artifactId>block-config</artifactId>
+			<version>${project.version}</version>
+			<type>jar</type>
+		</dependency>
 		
 		<dependency>
 			<groupId>com.block</groupId>

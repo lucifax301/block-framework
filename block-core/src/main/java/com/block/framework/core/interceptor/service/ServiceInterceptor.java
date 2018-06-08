@@ -8,6 +8,7 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.block.framework.common.model.BaseModel;
 import com.block.framework.core.trace.InnerTrace;
 import com.block.framework.core.trace.Trace;
 
