@@ -27,7 +27,7 @@ public class TraceInterceptorAdapter extends HandlerInterceptorAdapter {
 			throws Exception {
 		logger.debug("###### create RequestContext");
 		//System.out.println("###### create RequestContext");
-		RequestContext rc = RequestContext.create();
+		RequestContext rc = RequestContext.getOrCreate();
 		String traceId = TraceUtil.createTraceIdString();
 		rc.setTraceId(traceId);
 		rc.setIp(request.getRemoteAddr());
