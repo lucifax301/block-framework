@@ -1,5 +1,7 @@
 package com.block.framework.web.interceptor;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.lang.reflect.Method;
 
 import org.aspectj.lang.JoinPoint;
@@ -46,8 +48,11 @@ public class ControllerInterceptor {
 			ActionDescription description = (ActionDescription)method.getAnnotation(ActionDescription.class);
 			String error = description!=null?description.error():"";
 			e.printStackTrace();
-			throw new BlockException(error+":"+e.toString(),e);
-			
+			StringWriter sw = new StringWriter();
+			PrintWriter pw = new PrintWriter(sw);
+			e.printStackTrace(pw);
+			//throw new BlockException(error+":"+e.toString(),e);
+			throw new BlockException(error+":"+sw.toString(),e);
 		}
         
     }
