@@ -47,11 +47,12 @@ public class ControllerInterceptor {
 		}catch(Throwable e){
 			ActionDescription description = (ActionDescription)method.getAnnotation(ActionDescription.class);
 			String error = description!=null?description.error():"";
-			e.printStackTrace();
+			//e.printStackTrace();
 			StringWriter sw = new StringWriter();
 			PrintWriter pw = new PrintWriter(sw);
 			e.printStackTrace(pw);
 			//throw new BlockException(error+":"+e.toString(),e);
+			logger.warn(sw.toString());
 			throw new BlockException(error+":"+sw.toString(),e);
 		}
         

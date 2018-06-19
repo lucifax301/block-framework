@@ -73,6 +73,7 @@ public class Trace {
 	private static TraceReporterFactory traceReporterFactory=TraceReporterFactory.instance();
 	
 	private static void close(InnerTrace innerTrace){
+		if(traceReporterFactory!=null)
 		traceReporterFactory.getReporter().report(innerTrace);
 	}
 }
