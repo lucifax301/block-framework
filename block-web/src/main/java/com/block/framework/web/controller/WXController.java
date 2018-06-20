@@ -29,6 +29,7 @@ public abstract class WXController {
 		//通过code换取网页授权access_token
 		String tokenUrl="https://api.weixin.qq.com/sns/oauth2/access_token?appid="+getAppId()+"&secret="+getSecret()+"&code="+code+"&grant_type=authorization_code";
 		String response= HttpUtil.doGet(tokenUrl, "utf-8");
+		System.out.println(response);
 		JSONObject json= JSON.parseObject(response);
 		String access_token="";
 		String oppenId="";

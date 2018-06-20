@@ -2,11 +2,14 @@ package com.block.framework.core.trace.sender;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.block.framework.core.trace.InnerTrace;
 import com.block.framework.core.trace.TraceSender;
+import com.block.framework.core.trace.TraceSenderFactory;
 
 public class LogTraceSender implements TraceSender {
 
@@ -26,4 +29,8 @@ public class LogTraceSender implements TraceSender {
 
 	}
 
+	@PostConstruct  
+	public void init(){
+		TraceSenderFactory.addReporter("log", this);
+	}
 }

@@ -1,18 +1,24 @@
 package com.block.framework.core.trace.reporter;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.PostConstruct;
 
+import com.block.framework.core.trace.TraceReporterFactory;
 import com.block.framework.core.trace.TraceSender;
 import com.block.framework.core.trace.TraceSenderFactory;
 
 public class AsyncDBTraceReporter extends AsyncTraceReporter {
 
-	@Autowired
-	private TraceSenderFactory traceSenderFactory;
+//	@Autowired
+//	private TraceSenderFactory traceSenderFactory;
 	
 	@Override
 	public TraceSender getSender() {
-		return traceSenderFactory.getSender("db");
+		//return traceSenderFactory.getSender("db");
+		return TraceSenderFactory.getSender("db");
 	}
 
+	@PostConstruct  
+	public void init(){
+		TraceReporterFactory.addReporter("async", this);
+	}
 }

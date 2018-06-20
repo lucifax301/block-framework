@@ -4,10 +4,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.block.framework.core.trace.InnerTrace;
 import com.block.framework.core.trace.TraceSender;
+import com.block.framework.core.trace.TraceSenderFactory;
 import com.block.framework.core.trace.mapper.TraceMapper;
 
 public class DBTraceSender implements TraceSender {
@@ -28,4 +31,8 @@ public class DBTraceSender implements TraceSender {
 		traceMapper.insert(trace);
 	}
 
+	@PostConstruct  
+	public void init(){
+		TraceSenderFactory.addReporter("db", this);
+	}
 }

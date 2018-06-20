@@ -70,10 +70,11 @@ public class Trace {
 		return null;
 	}
 	
-	private static TraceReporterFactory traceReporterFactory=TraceReporterFactory.instance();
+	//private static TraceReporterFactory traceReporterFactory=TraceReporterFactory.instance();
 	
 	private static void close(InnerTrace innerTrace){
-		if(traceReporterFactory!=null)
-		traceReporterFactory.getReporter().report(innerTrace);
+//		if(traceReporterFactory!=null)
+//		traceReporterFactory.getReporter().report(innerTrace);
+		TraceReporterFactory.getReporter().report(innerTrace);
 	}
 }

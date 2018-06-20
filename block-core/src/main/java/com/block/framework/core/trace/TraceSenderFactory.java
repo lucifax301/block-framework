@@ -6,35 +6,43 @@ import javax.annotation.PostConstruct;
 
 public class TraceSenderFactory {
 
-	private String defaultSender;
+	private static String defaultSender;
 	
-	private ConcurrentHashMap<String,TraceSender> senders = new ConcurrentHashMap<String,TraceSender>(4);
+	private static ConcurrentHashMap<String,TraceSender> senders = new ConcurrentHashMap<String,TraceSender>(4);
 
-	public String getDefaultSender() {
+	public static String getDefaultSender() {
 		return defaultSender;
 	}
 
-	public void setDefaultSender(String defaultSender) {
-		this.defaultSender = defaultSender;
-	}
+//	public void setDefaultSender(String defaultSender) {
+//		this.defaultSender = defaultSender;
+//	}
 
-	public ConcurrentHashMap<String, TraceSender> getSenders() {
-		return senders;
-	}
+//	public ConcurrentHashMap<String, TraceSender> getSenders() {
+//		return senders;
+//	}
 
-	public void setSenders(ConcurrentHashMap<String, TraceSender> senders) {
-		this.senders = senders;
-	}
+//	public void setSenders(ConcurrentHashMap<String, TraceSender> senders) {
+//		this.senders = senders;
+//	}
 	
-	public TraceSender getSender(){
+	public static TraceSender getSender(){
 		return senders.get(defaultSender);
 	}
 	
-	public TraceSender getSender(String name){
+	public static TraceSender getSender(String name){
 		return senders.get(name);
 	}
-	@PostConstruct 
-	public void init(){
-		System.out.println("####################post contrauct TraceSenderFactory");
+	
+	public synchronized static void addReporter(String name,TraceSender sender){
+		senders.put(name, sender);
+		if(senders.isEmpty()){
+			defaultSender = name;
+		}
 	}
+	
+//	@PostConstruct 
+//	public void init(){
+//		System.out.println("####################post contrauct TraceSenderFactory");
+//	}
 }

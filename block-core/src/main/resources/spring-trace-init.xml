@@ -15,7 +15,7 @@
 	http://code.alibabatech.com/schema/dubbo 
 	http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 	
-	
+	<!--  
 	<bean id="dbsender" class="com.block.framework.core.trace.sender.DBTraceSender"/>
 	<bean id="logsender" class="com.block.framework.core.trace.sender.LogTraceSender"/>
 	
@@ -42,4 +42,19 @@
             </map>
         </property>
     </bean>
+    -->
+    
+    <bean id="dbsender" class="com.block.framework.core.trace.sender.DBTraceSender"/>
+	<bean id="logsender" class="com.block.framework.core.trace.sender.LogTraceSender"/>
+	<!--  
+	<bean id="traceSender.init" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+	    <property name="targetClass" value="com.block.framework.core.trace.TraceSenderFactory" />
+	    <property name="targetMethod" value="addReporter" />
+	    <property name="arguments">
+	            <value>115.159.79.223:26379</value> 
+	    </property>
+	</bean>
+	-->
+	<bean id="syncReporter" class="com.block.framework.core.trace.reporter.SyncDBTraceReporter"/>
+	<bean id="asyncReporter" class="com.block.framework.core.trace.reporter.AsyncDBTraceReporter"/>
 </beans>
