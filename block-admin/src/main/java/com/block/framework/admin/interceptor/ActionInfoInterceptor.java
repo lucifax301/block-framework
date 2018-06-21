@@ -27,6 +27,7 @@ import com.block.framework.config.RpcModel;
 import com.block.framework.core.constant.CoreConstants;
 
 /**
+ * 拦截controller annotation
  * controller层获取用户的session信息 ,并把session中数据库信息设置到BaseModel中。
  * @author lilixc
  */
