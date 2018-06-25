@@ -15,8 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.block.framework.admin.model.AdminUser;
-import com.block.framework.admin.util.DevProperties;
 import com.block.framework.common.model.ResultBean;
+import com.block.framework.common.util.DevProperties;
 import com.block.framework.common.util.GsonUtil;
 import com.block.framework.core.constant.CoreConstants;
 import com.block.framework.core.context.RequestContext;

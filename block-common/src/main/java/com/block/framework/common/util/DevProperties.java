@@ -1,4 +1,4 @@
-package com.block.framework.admin.util;
+package com.block.framework.common.util;
 
 public class DevProperties {
 	/**
