@@ -45,11 +45,13 @@ public class PurposeType {
     /**
      * 
      */
-    private PurposeType(int type, String desc)
+    public PurposeType(int type, String desc)
     {
         this.type = type;
         this.desc =desc;
     }
     
-    
+    public PurposeType(){
+    	
+    }
 }

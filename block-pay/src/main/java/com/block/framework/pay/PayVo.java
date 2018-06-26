@@ -26,8 +26,7 @@ public class PayVo {
     private PayClientVer clientVer;
     //备注信息
     private String remark;
-    //平安保险订单id
-    private String insuranceId;
+    
     //存取每种支付的额外信息
     private Map<String,String> ext;
     
@@ -66,7 +65,7 @@ public class PayVo {
         setClientVer(clientVer);
         this.couponId = couponId;
         this.remark = remark;
-        this.insuranceId=insuranceId;
+        
     }
 
     /**
@@ -193,15 +192,6 @@ public class PayVo {
     
     
 
-    public String getInsuranceId() {
-		return insuranceId;
-	}
-
-	public void setInsuranceId(String insuranceId) {
-		this.insuranceId = insuranceId;
-	}
-
-	
 	
 	public PurposeType getPayPurpose() {
 		return payPurpose;
@@ -232,6 +222,6 @@ public class PayVo {
     public String toString() {
         return "PayVo [userId=" + userId + ", userType=" + userType + ", payValue=" + payValue + ", payWay=" + payWay
                 + ", payOrderId=" + payOrderId + ", payPurpose=" + payPurpose+", clientVer=" + clientVer + ", couponId=" + couponId
-                +  ", remark=" + remark + ", insuranceId=" + insuranceId + "]";
+                +  ", remark=" + remark + "]";
     }
 }

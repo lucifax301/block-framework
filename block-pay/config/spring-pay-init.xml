@@ -25,7 +25,25 @@
     </bean>  
 	
 	<bean id="wxPayConfig" class="com.block.framework.pay.wxpay.config.WXPayConfig">
-        
+        <property name="keysMap">
+            <map>
+            <!-- 0 app 1 公众号 2小程序 -->
+                <entry key="0" value="${wx.pay.student.appstore.key}"/>
+                
+            </map>
+        </property>
+        <property name="appIDMap">
+            <map>
+                <entry key="0" value="${wx.pay.student.appstore.appID}"/>
+                
+            </map>
+        </property>
+        <property name="mchIDMap">
+            <map>
+                <entry key="0" value="${wx.pay.student.appstore.mchID}"/>
+                
+            </map>
+        </property>
         <property name="certLocalPath" value="${wx.pay.certLocalPath}"/>
         <property name="certPassword" value="${wx.pay.certPassword}"/>
         <property name="useThreadToDoReport" value="${wx.pay.useThreadToDoReport}"/>

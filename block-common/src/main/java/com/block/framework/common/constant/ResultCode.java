@@ -32,6 +32,9 @@ public class ResultCode {
 		public static final int MOBILE_NUMBER_ERROR = 15;
 		public static final int MOBILE_NOT_EXIT_ERROR = 16;
 		public static final int PARAMEMPTY=17;
+		public static final int ORDER_MONEY_MOTIFY = 18;
+		public static final int ORDER_NON_EXIST = 19;
+		public static final int ORDER_HAS_PAYED = 20;
     }
     public class ERRORINFO {
         public static final String SUCCESS="操作成功";
@@ -53,6 +56,8 @@ public class ResultCode {
         public static final String MOBILE_NUMBER_ERROR="手机号码错误";
         public static final String MOBILE_NOT_EXIT_ERROR="手机号码不存在";
         public static final String PARAMEMPTY="缺少参数";
+        public static final String ORDER_NON_EXIST="订单不存在";
+        public static final String ORDER_HAS_PAYED="订单已经支付";
     }
     
     private static ConcurrentHashMap<String,Integer> codeInfo=new ConcurrentHashMap<String,Integer>();
