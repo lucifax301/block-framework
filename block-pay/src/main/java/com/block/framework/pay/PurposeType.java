@@ -54,4 +54,8 @@ public class PurposeType {
     public PurposeType(){
     	
     }
+    
+    public static PurposeType parse(int type){
+    	return new PurposeType(type,"");
+    }
 }

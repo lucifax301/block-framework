@@ -2,8 +2,8 @@ package com.block.framework.pay;
 
 public enum PayClientVer {
 
-	WX_APP(1, "微信APP支付"),
-    WX_WEB(2, "微信公众号支付"),
+	WX_APP(0, "微信APP支付"),
+    WX_WEB(1, "微信公众号支付"),
     WX_AAPP(2, "微信小程序支付") ; 
 
     int type;

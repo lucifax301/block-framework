@@ -21,7 +21,7 @@ import com.block.framework.pay.PayService;
 import com.block.framework.pay.PayServiceFactory;
 
 @Controller
-@RequestMapping("/paynotify")
+@RequestMapping("/open")
 public class WXPayNotifyController {
 
 	private static Logger logger = LoggerFactory.getLogger(WXPayNotifyController.class);
@@ -34,7 +34,7 @@ public class WXPayNotifyController {
      *
      * @return
      */
-    @RequestMapping(value = "/wxPayCallBack", produces = "text/html", method = RequestMethod.POST)
+    @RequestMapping(value = "/paynotify/wxPayCallBack", produces = "text/html", method = RequestMethod.POST)
     public void wxPayCallBack(HttpServletRequest request, HttpServletResponse response) {
         PayReqResult r = new PayReqResult();
         try {
@@ -56,6 +56,7 @@ public class WXPayNotifyController {
             r = service.payCallback(result);
 
             PrintWriter out = response.getWriter();
+            logger.info("response to wx:"+r.getResult().get(ResultCode.RESULTKEY.DATA));
             out.print(r.getResult().get(ResultCode.RESULTKEY.DATA));
         } catch (Exception e) {
             logger.error("wxPayCallBack:" + r.getResult(), e);

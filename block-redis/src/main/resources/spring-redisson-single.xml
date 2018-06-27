@@ -16,7 +16,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 	<bean id="redissonResources" class="java.util.ArrayList">  
         <constructor-arg>  
         <list>  
-            <value>classpath*:jedis.properties</value>  
+            <value>classpath*:redis.properties</value>  
         </list>  
         </constructor-arg>  
     </bean>  
@@ -36,7 +36,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 	    <property name="targetObject" ref="redissonSingleConfig" />
 	    <property name="targetMethod" value="setAddress" />
 	    <property name="arguments">
-	            <value>${redis.ip}</value>
+	            <value>${redis.ip}:${redis.port}</value>
 	    </property>
 	</bean>
 	<bean id="redissonConfig.init" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">

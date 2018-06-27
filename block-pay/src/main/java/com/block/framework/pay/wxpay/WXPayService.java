@@ -25,8 +25,6 @@ public class WXPayService implements PayService<String> {
 	@Autowired
 	private DistributedRedisLock dlock;
 	
-	@Autowired
-	private PurposeServiceFactory purposeServiceFactory;
 	
 	@Autowired
 	private PayFactory payFactory;
@@ -43,7 +41,7 @@ public class WXPayService implements PayService<String> {
 
             if (hasLock) {
             	
-            	IPayPurposeService service = purposeServiceFactory.getHandler(pay.getPayPurpose());
+            	IPayPurposeService service = PurposeServiceFactory.getHandler(pay.getPayPurpose());
             	service.preHandle(pay);
             	
 

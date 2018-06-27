@@ -23,6 +23,7 @@ import com.block.framework.pay.PurposeType;
 import com.block.framework.pay.util.PayConstants;
 import com.block.framework.pay.wxpay.config.WXPayConfig;
 import com.block.framework.redis.RedisClient;
+import com.block.framework.redis.RedisUtil;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.tencent.WXPay;
@@ -48,7 +49,7 @@ public class WXPayAction extends PayAction {
 	@Autowired
     protected WXPayConfig wxPayConfig;
 	@Autowired
-	private RedisClient redisClient;
+	private RedisUtil redisClient;
 	
 	@PostConstruct
     public void initWXConfig()

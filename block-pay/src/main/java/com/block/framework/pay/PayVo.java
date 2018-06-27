@@ -39,7 +39,7 @@ public class PayVo {
      * @param payPurpose
      * @param couponId
      */
-    public PayVo(long userId, int userType, int payValue, String payWay, String payOrderId, PurposeType payPurpose,
+    public PayVo(long userId, int userType, int payValue, String payWay, String payOrderId, int payPurpose,
             long couponId, int clientVer, String remark) {
 	   super();
 	   this.userId = userId;
@@ -47,13 +47,13 @@ public class PayVo {
 	   this.payValue = payValue;
 	   this.payWay = payWay;
 	   this.payOrderId = payOrderId;
-	   this.payPurpose=payPurpose;
 	   setClientVer(clientVer);
+	   setPayPurpose(payPurpose);
 	   this.couponId = couponId;
 	   this.remark = remark;
     }
     
-    public PayVo(long userId, int userType, int payValue, String payWay, String payOrderId, PurposeType payPurpose,
+    public PayVo(long userId, int userType, int payValue, String payWay, String payOrderId, int payPurpose,
                  long couponId, int clientVer, String remark,String insuranceId) {
         super();
         this.userId = userId;
@@ -61,8 +61,8 @@ public class PayVo {
         this.payValue = payValue;
         this.payWay = payWay;
         this.payOrderId = payOrderId;
-        this.payPurpose=payPurpose;
         setClientVer(clientVer);
+        setPayPurpose(payPurpose);
         this.couponId = couponId;
         this.remark = remark;
         
@@ -197,9 +197,12 @@ public class PayVo {
 		return payPurpose;
 	}
 
-	public void setPayPurpose(PurposeType payPurpose) {
-		this.payPurpose = payPurpose;
-	}
+	public void setPayPurpose(int payPurpose) {
+        this.payPurpose = PurposeType.parse(payPurpose);
+    }
+//	public void setPayPurpose(PurposeType payPurpose) {
+//		this.payPurpose = payPurpose;
+//	}
 
 	public void setClientVer(PayClientVer clientVer) {
 		this.clientVer = clientVer;

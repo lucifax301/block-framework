@@ -15,7 +15,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 	<bean id="redisResources" class="java.util.ArrayList">  
         <constructor-arg>  
         <list>  
-            <value>classpath*:jedis.properties</value>  
+            <value>classpath*:redis.properties</value>  
         </list>  
         </constructor-arg>  
     </bean>  
@@ -47,5 +47,5 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 	<bean id="stringRedisSerializer" class="org.springframework.data.redis.serializer.StringRedisSerializer"></bean>
 	<bean id="jdkSerializationRedisSerializer" class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"></bean>
 	
-	<bean id="redisUtil" class="com.lili.common.util.redis.RedisUtil" ></bean>	 
+	<bean id="redisUtil" class="com.block.framework.redis.RedisUtil" ></bean>	 
 </beans>

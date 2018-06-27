@@ -31,7 +31,7 @@ public class WebUtil {
 	public static final int COOKIES_LOGOUT_SECONDS = 0;
 	
 
-	public static final String COOKIE_ACCOUNT_STR = "lilixc";
+	public static final String COOKIE_ACCOUNT_STR = "blockapp";
 	
 
 	public static final String REQUEST_GET = "GET";
