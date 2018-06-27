@@ -1,5 +1,6 @@
 package com.block.framework.pay;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class PayVo {
@@ -28,7 +29,7 @@ public class PayVo {
     private String remark;
     
     //存取每种支付的额外信息
-    private Map<String,String> ext;
+    private Map<String,String> ext = new HashMap(4);
     
     /**
      * @param userId

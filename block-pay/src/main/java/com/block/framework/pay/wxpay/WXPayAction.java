@@ -223,6 +223,7 @@ public class WXPayAction extends PayAction {
         }
         catch (Exception e)
         {
+        	e.printStackTrace();
             logger.error("WXPAY|payVo:" + payVo, e);
             //emailService.send("【系统】[用户支付异常啦，请抓紧时间处理！！]", "WXPayAction-->doPayAction|"+payVo+"|Exception:"+e);
         }
