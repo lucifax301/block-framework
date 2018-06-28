@@ -80,6 +80,12 @@ public class PayReqResult implements Serializable{
 	        reqResult.setMsgInfo(ResultCode.ERRORINFO.FAILED);
 	        return reqResult;
 	    }
+	    public static PayReqResult getFailed(int code,String msg){
+	        PayReqResult reqResult=new PayReqResult();
+	        reqResult.setCode(code);
+	        reqResult.setMsgInfo(msg);
+	        return reqResult;
+	    }
 	    public static PayReqResult getParamError() {
 	    	PayReqResult reqResult=new PayReqResult();
 	        reqResult.setCode(ResultCode.ERRORCODE.PARAMERROR);

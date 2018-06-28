@@ -42,8 +42,12 @@ public class WXPayService implements PayService<String> {
             if (hasLock) {
             	
             	IPayPurposeService service = PurposeServiceFactory.getHandler(pay.getPayPurpose());
-            	if(service!=null)
-            		service.preHandle(pay);
+            	if(service!=null){
+            		PayReqResult preResult = service.preHandle(pay);
+            		if(!preResult.isSuccess()){
+            			return preResult;
+            		}
+            	}
             	
 
 //                // 校验一下参数

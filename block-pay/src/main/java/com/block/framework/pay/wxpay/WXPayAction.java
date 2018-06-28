@@ -106,8 +106,28 @@ public class WXPayAction extends PayAction {
                     return;
                 }
             }
-
-            UnifiedOrderReqData unifiedOrderReqData = new UnifiedOrderReqData(payVo.getPayPurpose().getDesc(),
+            
+            /**
+             * app支付的报文
+             *  <appid>wxabbccf92718c7e9d</appid>
+				  <mch_id>1503939271</mch_id>
+				  <device_info>APP</device_info>
+				  <nonce_str>4w7b256q3pcd02xlsoooaa8ey00hj2og</nonce_str>
+				  <sign>3600E613657AF55E15AB2F1740BC3273</sign>
+				  <body>约考场费</body>
+				  <attach>0,0</attach>
+				  <out_trade_no>201806271808331530094113142</out_trade_no>
+				  <total_fee>4</total_fee>
+				  <spbill_create_ip>127.0.0.1</spbill_create_ip>
+				  <time_start>20180627180835</time_start>
+				  <time_expire>20180627181835</time_expire>
+				  <notify_url>http://39.108.11.184/payaccess/v1/files/wxPayCallBack</notify_url>
+				  <trade_type>APP</trade_type>
+				  <openid></openid>
+             */
+            //String payDesc = payVo.getPayPurpose().getDesc();
+            String payDesc = PurposeHandlerFactory.getPurposeType(payVo.getPayPurpose().getType()).getDesc();
+            UnifiedOrderReqData unifiedOrderReqData = new UnifiedOrderReqData(payDesc,
                     payVo.getCouponId() + ","
                             + String.valueOf(discount),
                     payVo.getPayOrderId(), payVo.getPayValue(),
