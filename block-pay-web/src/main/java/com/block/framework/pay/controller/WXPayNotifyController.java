@@ -31,7 +31,7 @@ public class WXPayNotifyController {
 	
 	/**
      * 第三方接口：微信回调接口
-     *
+     * https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=9_7&index=3
      * @return
      */
     @RequestMapping(value = "/paynotify/wxPayCallBack", produces = "text/html", method = RequestMethod.POST)
@@ -52,6 +52,7 @@ public class WXPayNotifyController {
                 tempLine = rd.readLine();
             }
             String result = tempStr.toString();
+            logger.info("receive:"+result);
             PayService service = payServiceFactory.getService("wx");
             r = service.payCallback(result);
 

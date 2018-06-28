@@ -1,9 +1,10 @@
 package com.block.framework.pay;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PayVo {
+public class PayVo implements Serializable{
 
 	private static final long serialVersionUID = -4118061263751669421L;
 

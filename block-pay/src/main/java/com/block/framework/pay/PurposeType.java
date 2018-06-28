@@ -1,6 +1,8 @@
 package com.block.framework.pay;
 
-public class PurposeType {
+import java.io.Serializable;
+
+public class PurposeType implements Serializable{
 	/**
 	 * 业务自定义支付目的类型
 	 */

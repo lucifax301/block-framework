@@ -295,6 +295,8 @@ public class WXPayAction extends PayAction {
 //            		logger.error(reqResult+" with "+payVo+" is not incorrect,so do nothing.");
 //            		
 //            	}
+            }else{//if not in redis, search in db
+            	
             }
         }
         else
