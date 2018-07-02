@@ -34,6 +34,7 @@ public class UnifiedOrderReqData {
     private String notify_url = "";
     private String trade_type = "";
     private String openid="";
+    private String sign_type="MD5";
     /**
      * @param authCode 这个是扫码终端设备从用户手机上扫取到的支付授权号，这个号是跟用户用来支付的银行卡绑定的，有效期是1分钟
      * @param body 要支付的商品的描述信息，用户会在支付成功页面里看到这个信息
@@ -96,7 +97,21 @@ public class UnifiedOrderReqData {
 
     }
 
-    public String getAppid() {
+    
+    
+    public String getSign_type() {
+		return sign_type;
+	}
+
+
+
+	public void setSign_type(String sign_type) {
+		this.sign_type = sign_type;
+	}
+
+
+
+	public String getAppid() {
         return appid;
     }
 

@@ -88,7 +88,7 @@ public class WXPayAction extends PayAction {
             	dev_info = "WEB";
             }else if (payVo.getClientVer() == PayClientVer.WX_AAPP ) {
             	payType = "JSAPI";
-            	dev_info = "AAPP";
+            	dev_info = "WEB";
             }
             else {
             	payType = "APP";
