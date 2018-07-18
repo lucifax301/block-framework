@@ -60,7 +60,7 @@ public class Trace {
 			InnerTrace parent = innerTrace.getParent();
 			current.set(parent);
 			innerTrace.setNanoEndTime(System.currentTimeMillis());
-			innerTrace.setDuration(innerTrace.getNanoStartTime()-innerTrace.getNanoEndTime());
+			innerTrace.setDuration((innerTrace.getNanoEndTime()-innerTrace.getNanoStartTime()));
 			//innerTrace.close();
 			if(TraceConfig.enableTrace()){
 				close(innerTrace);

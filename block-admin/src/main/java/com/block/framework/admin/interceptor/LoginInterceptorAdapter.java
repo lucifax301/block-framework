@@ -86,6 +86,7 @@ public class LoginInterceptorAdapter extends HandlerInterceptorAdapter {
 	
 	private void printJson(HttpServletResponse response,String msg, Exception ex) {
 		ResultBean rb = new ResultBean(msg);
+		rb.setCode(900);
 		response.setContentType("application/json"); 
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter out = null;

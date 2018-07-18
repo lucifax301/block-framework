@@ -1,8 +1,11 @@
 package com.block.framework.core.trace;
 
+import java.io.Serializable;
+import java.util.Date;
+
 import com.block.framework.common.model.BuModel;
 
-public class InnerTrace extends BuModel{
+public class InnerTrace extends BuModel implements Serializable{
 
 	public static final String TRACE_ID = "trace_id";
 	public static final String SPAN_ID = "span_id";
@@ -22,7 +25,11 @@ public class InnerTrace extends BuModel{
 	
 	private long nanoStartTime;
 	
+	private Date startTime;
+	
 	private long nanoEndTime;
+	
+	private Date endTime;
 	
 	private long duration;
 	
@@ -35,6 +42,24 @@ public class InnerTrace extends BuModel{
 	
 	private int step;
 	
+	
+	
+	public Date getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
+	}
+
+	public Date getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
+	}
+
 	public String getServiceType() {
 		return serviceType;
 	}

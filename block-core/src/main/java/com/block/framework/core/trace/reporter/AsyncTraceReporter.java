@@ -54,9 +54,13 @@ public abstract class AsyncTraceReporter implements TraceReporter {
 	}
 	
 	class TraceSenderConsumer extends Thread{
-		
+		//create topic E:\rocketmq\rocketmq\bin>mqadmin updateTopic -t trace_topic -b 127.0.0.1:10911 -n localhost:9876
+		//mqadmin topicList -n localhost:9876
+		//mqadmin clusterList -n localhost:9876
+		//autoCreateTopicEnable=true
 		@Override
 		public void run(){
+			System.out.println("TraceSenderConsumer thread start####");
 			List<InnerTrace> list = new ArrayList<InnerTrace>();
 			long calTime = 0;
 			long startTime = 0;

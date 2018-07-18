@@ -50,10 +50,11 @@ public class TraceReporterFactory {
 	
 	public synchronized static void addReporter(String name,TraceReporter reporter){
 		System.out.println("################add reporter:"+name);
-		reporters.put(name, reporter);
 		if(reporters.isEmpty()){
 			defaultReporter = name;
 		}
+		reporters.put(name, reporter);
+		
 	}
 	
 //	private static TraceReporterFactory factory;

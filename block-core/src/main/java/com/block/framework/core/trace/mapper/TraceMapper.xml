@@ -6,8 +6,8 @@
     <result column="traceId" property="traceId" jdbcType="VARCHAR" />
     <result column="spanId" property="spanId" jdbcType="VARCHAR" />
     <result column="parentSpanId" property="parentSpanId" jdbcType="VARCHAR" />
-    <result column="nanoStartTime" property="nanoStartTime" jdbcType="TIMESTAMP" />
-    <result column="nanoEndTime" property="nanoEndTime" jdbcType="TIMESTAMP" />
+    <result column="startTime" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="endTime" property="endTime" jdbcType="TIMESTAMP" />
     <result column="duration" property="duration" jdbcType="INTEGER" />
     <result column="methodName" property="methodName" jdbcType="VARCHAR" />
     <result column="ip" property="ip" jdbcType="VARCHAR" />
@@ -17,7 +17,7 @@
     
   </resultMap>
   <sql id="Base_Column_List" >
-    id, traceId, spanId,parentSpanId, nanoStartTime, nanoEndTime, duration, methodName, ip, serviceType,step, ctime
+    id, traceId, spanId,parentSpanId, startTime, endTime, duration, methodName, ip, serviceType,step, ctime
     
   </sql>
   
@@ -60,17 +60,17 @@
   
   
   <insert id="batchInsert" parameterType="java.util.List" >
-    insert into t_trace (traceId,spanId,parentSpanId, nanoStartTime, nanoEndTime,duration,methodName,  ip,serviceType,step,ctime)
+    insert into t_trace (traceId,spanId,parentSpanId, startTime, endTime,duration,methodName,  ip,serviceType,step,ctime)
     values 
     <foreach collection="list" item="item" index="index" open="" close="" separator=",">
-	(#{item.traceId},#{item.spanId},#{item.parentSpanId},#{item.nanoStartTime},#{item.nanoEndTime},#{item.duration},#{item.methodName},#{item.ip},#{item.serviceType},#{item.step},now())
+	(#{item.traceId},#{item.spanId},#{item.parentSpanId},#{item.startTime},#{item.endTime},#{item.duration},#{item.methodName},#{item.ip},#{item.serviceType},#{item.step},now())
 	</foreach>
   </insert>
   
   <insert id="insert" parameterType="com.block.framework.core.trace.InnerTrace" >
-    insert into t_trace (traceId,spanId,parentSpanId, nanoStartTime, nanoEndTime,duration,methodName,  ip,serviceType,step,ctime)
+    insert into t_trace (traceId,spanId,parentSpanId, startTime, endTime,duration,methodName,  ip,serviceType,step,ctime)
     values 
-    (#{traceId},#{spanId},#{parentSpanId},#{nanoStartTime},#{nanoEndTime},#{duration},#{methodName},#{ip},#{serviceType},step,now())
+    (#{traceId},#{spanId},#{parentSpanId},#{startTime},#{endTime},#{duration},#{methodName},#{ip},#{serviceType},step,now())
   </insert>
   
 </mapper>
