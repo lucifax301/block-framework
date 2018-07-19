@@ -13,7 +13,10 @@
 			<artifactId>block-common</artifactId>
 			<version>${project.version}</version>
 			<type>jar</type>
-		</dependency>
+	</dependency>
+	
+	
+	<!-- ali sms -->	
   	<dependency>  
 		    <groupId>com.aliyun</groupId>
 			  <artifactId>aliyun-java-sdk-core</artifactId>
@@ -28,5 +31,13 @@
 			  <scope>system</scope>
 		    <systemPath>${project.basedir}/lib/aliyun-java-sdk-dysmsapi-1.0.0.jar</systemPath>  
 		</dependency>
+		
+		<!-- tencent sms -->
+		<dependency>
+		  <groupId>com.github.qcloudsms</groupId>
+		  <artifactId>qcloudsms</artifactId>
+		  <version>1.0.2</version>
+		</dependency>
+		
   </dependencies>
 </project>

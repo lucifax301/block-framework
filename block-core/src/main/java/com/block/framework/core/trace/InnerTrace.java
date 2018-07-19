@@ -42,8 +42,18 @@ public class InnerTrace extends BuModel implements Serializable{
 	
 	private int step;
 	
+	private String ext;
 	
 	
+	
+	public String getExt() {
+		return ext;
+	}
+
+	public void setExt(String ext) {
+		this.ext = ext;
+	}
+
 	public Date getStartTime() {
 		return startTime;
 	}

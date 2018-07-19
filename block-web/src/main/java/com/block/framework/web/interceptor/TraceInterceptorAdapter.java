@@ -50,6 +50,7 @@ public class TraceInterceptorAdapter extends HandlerInterceptorAdapter {
             HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)    
             throws Exception { 
 		logger.debug("###### clear RequestContext");
+		System.out.println("ex:"+ex);
 		//System.out.println("###### clear RequestContext");
 		RequestContext.set(null);
 		Trace.endTrace();
