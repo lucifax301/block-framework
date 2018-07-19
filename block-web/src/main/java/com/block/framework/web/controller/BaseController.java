@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.InitBinder;
 import com.block.framework.common.constant.CommonConstans;
 import com.block.framework.common.model.ResultBean;
 import com.block.framework.common.util.GsonUtil;
+import com.block.framework.core.constant.CoreConstants;
+import com.block.framework.core.context.RequestContext;
 import com.github.pagehelper.PageInfo;
 
 public class BaseController {
@@ -33,6 +35,9 @@ public class BaseController {
 		//ex.printStackTrace();
 		System.out.println("exceptionHandler");
         ResultBean rb = new ResultBean(CommonConstans.DEFAULT_ERROR_CODE,CommonConstans.DEFAULT_ERROR_MSG+":"+ex.getMessage());
+        
+        RequestContext.putValue(CoreConstants.REQUEST_ERROR, "1");
+        
     	printJson(response, rb,ex);
     }
 	

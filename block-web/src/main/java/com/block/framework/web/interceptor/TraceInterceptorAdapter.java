@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import com.block.framework.core.constant.CoreConstants;
 import com.block.framework.core.context.RequestContext;
 import com.block.framework.core.trace.InnerTrace;
 import com.block.framework.core.trace.Trace;
@@ -52,7 +53,11 @@ public class TraceInterceptorAdapter extends HandlerInterceptorAdapter {
 		logger.debug("###### clear RequestContext");
 		System.out.println("ex:"+ex);
 		//System.out.println("###### clear RequestContext");
+		Object err = RequestContext.getValue(CoreConstants.REQUEST_ERROR);
 		RequestContext.set(null);
+		if(err!=null){
+			Trace.getCurrentTrace().setResult(1);
+		}
 		Trace.endTrace();
     } 
 }

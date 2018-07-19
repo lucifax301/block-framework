@@ -44,8 +44,18 @@ public class InnerTrace extends BuModel implements Serializable{
 	
 	private String ext;
 	
+	private int result;
 	
 	
+	
+	public int getResult() {
+		return result;
+	}
+
+	public void setResult(int result) {
+		this.result = result;
+	}
+
 	public String getExt() {
 		return ext;
 	}

@@ -60,17 +60,17 @@
   
   
   <insert id="batchInsert" parameterType="java.util.List" >
-    insert into t_trace (traceId,spanId,parentSpanId, startTime, endTime,duration,methodName,  ip,serviceType,step,ctime)
+    insert into t_trace (traceId,spanId,parentSpanId, startTime, endTime,duration,methodName,  ip,serviceType,step,ctime,result)
     values 
     <foreach collection="list" item="item" index="index" open="" close="" separator=",">
-	(#{item.traceId},#{item.spanId},#{item.parentSpanId},#{item.startTime},#{item.endTime},#{item.duration},#{item.methodName},#{item.ip},#{item.serviceType},#{item.step},now())
+	(#{item.traceId},#{item.spanId},#{item.parentSpanId},#{item.startTime},#{item.endTime},#{item.duration},#{item.methodName},#{item.ip},#{item.serviceType},#{item.step},now(),#{item.result})
 	</foreach>
   </insert>
   
   <insert id="insert" parameterType="com.block.framework.core.trace.InnerTrace" >
-    insert into t_trace (traceId,spanId,parentSpanId, startTime, endTime,duration,methodName,  ip,serviceType,step,ctime)
+    insert into t_trace (traceId,spanId,parentSpanId, startTime, endTime,duration,methodName,  ip,serviceType,step,ctime,result)
     values 
-    (#{traceId},#{spanId},#{parentSpanId},#{startTime},#{endTime},#{duration},#{methodName},#{ip},#{serviceType},step,now())
+    (#{traceId},#{spanId},#{parentSpanId},#{startTime},#{endTime},#{duration},#{methodName},#{ip},#{serviceType},step,now(),#{result})
   </insert>
   
 </mapper>
