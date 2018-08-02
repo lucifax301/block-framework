@@ -3,6 +3,8 @@ package com.block.framework.sms;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
+
 import com.block.framework.common.service.ServiceFactory;
 
 public class SmsServiceFactory implements ServiceFactory<SmsService>{
@@ -39,5 +41,20 @@ public class SmsServiceFactory implements ServiceFactory<SmsService>{
 	@Override
 	public SmsService getService(){
 		return services.get(defaultName);
+	}
+	
+	private static SmsServiceFactory factory = null;
+	
+	@PostConstruct  
+	public void init() { 
+		factory = this;
+		
+	}
+	
+	public synchronized static void addService(String name,SmsService service){
+		if(factory.getServices().isEmpty()){
+			factory.setDefaultName(name);
+		}
+		factory.getServices().put(name, service);
 	}
 }

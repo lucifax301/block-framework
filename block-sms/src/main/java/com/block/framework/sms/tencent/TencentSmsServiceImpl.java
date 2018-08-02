@@ -2,11 +2,14 @@ package com.block.framework.sms.tencent;
 
 import java.io.IOException;
 
+import javax.annotation.PostConstruct;
+
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.block.framework.sms.SendSmsResult;
 import com.block.framework.sms.SmsService;
+import com.block.framework.sms.SmsServiceFactory;
 import com.github.qcloudsms.SmsSingleSender;
 import com.github.qcloudsms.SmsSingleSenderResult;
 import com.github.qcloudsms.httpclient.HTTPException;
@@ -43,4 +46,8 @@ public class TencentSmsServiceImpl implements SmsService<String[]> {
 		}
 	}
 
+	@PostConstruct  
+	public void init(){
+		SmsServiceFactory.addService("tencent", this);
+	}
 }

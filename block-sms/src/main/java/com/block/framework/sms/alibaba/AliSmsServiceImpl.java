@@ -2,6 +2,8 @@ package com.block.framework.sms.alibaba;
 
 import java.util.Date;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,7 @@ import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
 import com.block.framework.sms.SendSmsResult;
 import com.block.framework.sms.SmsService;
+import com.block.framework.sms.SmsServiceFactory;
 
 @Service
 public class AliSmsServiceImpl implements SmsService<String> {
@@ -57,4 +60,8 @@ public class AliSmsServiceImpl implements SmsService<String> {
         return new SendSmsResult(sendSmsResponse.getCode(),sendSmsResponse.getMessage());
 	}
 
+	@PostConstruct  
+	public void init(){
+		SmsServiceFactory.addService("ali", this);
+	}
 }

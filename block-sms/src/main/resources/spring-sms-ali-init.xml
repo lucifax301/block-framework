@@ -15,45 +15,12 @@
 	http://code.alibabatech.com/schema/dubbo 
 	http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 	
-	<!--  
-	<bean id="fileResources" class="java.util.ArrayList">  
-        <constructor-arg>  
-        <list>  
-            <value>classpath*:sms-ali.properties</value>  
-        </list>  
-        </constructor-arg>  
-    </bean>
-    -->  
-    <!--  
-    <bean id="smsConfigurer"
-		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="locations">
-			<list>
-				<value>classpath*:sms-ali.properties</value>
-			</list>
-		</property>
-		<property name="fileEncoding" value="utf-8" />
-	</bean>
-	
 	<bean id="aliSmsConfig" class="com.block.framework.sms.alibaba.SmsConfig">
         <property name="accessKeyId" value="${sms.ali.accessKeyId}"/>
         <property name="accessKeySecret" value="${sms.ali.accessKeySecret}"/>
     </bean>
 	
 	<bean id="aliSmsService" class="com.block.framework.sms.alibaba.AliSmsServiceImpl"/>
-	-->
-	<bean id="fileServiceFactory" class="com.block.framework.sms.SmsServiceFactory">
-		<!--  
-		<property name="defaultName" value="ali"></property>
-		<property name="services">
-            <map>
-                <entry key="ali" value-ref="aliSmsService" />
-            </map>
-        </property>
-        -->
-    </bean>
-    
-    <import resource="classpath*:spring-sms-ali-init.xml"/>
-    <import resource="classpath*:spring-sms-tencent-init.xml"/>
-    
+	
+	
 </beans>
