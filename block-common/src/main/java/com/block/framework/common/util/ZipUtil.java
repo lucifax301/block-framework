@@ -222,7 +222,19 @@ public class ZipUtil {
                 securityManager.checkDelete(entryFilePath);    
                 //删除已存在的目标文件    
                 entryFile.delete();     
-            }    
+            }else{
+            	if(entry.isDirectory()){
+            		if(entry.getName().indexOf("__MACOSX")>=0){
+            			continue;
+            		}
+            		entryFile.mkdirs();
+            		continue;
+            	}else{
+            		if(entry.getName().indexOf(".DS_Store")>=0||entry.getName().indexOf("__MACOSX")>=0){
+            			continue;
+            		}
+            	}
+            }
                 
             //写入文件    
             bos = new BufferedOutputStream(new FileOutputStream(entryFile));    
