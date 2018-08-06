@@ -205,13 +205,16 @@ public class ZipUtil {
             else    
             {    
                 entryDirPath = "";    
-            }               
-            entryDir = new File(entryDirPath);    
-            //如果文件夹路径不存在，则创建文件夹    
-            if (!entryDir.exists() || !entryDir.isDirectory())    
-            {    
-                entryDir.mkdirs();    
-            }    
+            } 
+            
+            if(!entry.getName().endsWith("/")){
+	            entryDir = new File(entryDirPath);    
+	            //如果文件夹路径不存在，则创建文件夹    
+	            if (!entryDir.exists() || !entryDir.isDirectory())    
+	            {    
+	                entryDir.mkdirs();    
+	            }    
+            }
                 
             //创建解压文件    
             entryFile = new File(entryFilePath);    
