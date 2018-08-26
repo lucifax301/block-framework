@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import com.block.framework.common.annotation.ActionDescription;
 import com.block.framework.common.exception.BlockException;
+import com.block.framework.common.model.BaseModel;
 
 /**
  * @author devil
@@ -41,7 +42,12 @@ public class ControllerInterceptor {
     	logger.debug("controllerAspect 已经记录下操作日志@Around 方法执行前");
 		MethodSignature methodSignature = (MethodSignature)pjp.getSignature();
 		Method method = methodSignature.getMethod();
-		
+		Object[] args = pjp.getArgs();
+		for(Object arg:args){
+			if(arg instanceof BaseModel){
+				logger.info("web controller model:"+arg.toString());
+			}
+		}
 		try{
 			return pjp.proceed();
 		}catch(Throwable e){
