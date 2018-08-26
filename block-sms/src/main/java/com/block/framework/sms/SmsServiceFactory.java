@@ -7,54 +7,55 @@ import javax.annotation.PostConstruct;
 
 import com.block.framework.common.service.ServiceFactory;
 
-public class SmsServiceFactory implements ServiceFactory<SmsService>{
+public class SmsServiceFactory {
 
-	private Map<String,SmsService> services = new HashMap<String,SmsService>();
+	private static Map<String,SmsService> services = new HashMap<String,SmsService>();
 
-	private String defaultName;
-	
-	
-	
-	public String getDefaultName() {
-		return defaultName;
-	}
+	private static String defaultName;
+//	
+//	
+//	
+//	public String getDefaultName() {
+//		return defaultName;
+//	}
+//
+//	public void setDefaultName(String defaultName) {
+//		this.defaultName = defaultName;
+//	}
+//
+//	
+//	
+//	public Map<String, SmsService> getServices() {
+//		return services;
+//	}
 
-	public void setDefaultName(String defaultName) {
-		this.defaultName = defaultName;
-	}
-
+//	public void setServices(Map<String, SmsService> services) {
+//		this.services = services;
+//	}
 	
 	
-	public Map<String, SmsService> getServices() {
-		return services;
-	}
-
-	public void setServices(Map<String, SmsService> services) {
-		this.services = services;
-	}
-	
-	@Override
-	public SmsService getService(String name)
+	public static SmsService getService(String name)
     {
 		return services.get(name);
     }
-	@Override
-	public SmsService getService(){
+	
+	public static SmsService getService(){
 		return services.get(defaultName);
 	}
 	
-	private static SmsServiceFactory factory = null;
+//	private static SmsServiceFactory factory = null;
 	
-	@PostConstruct  
-	public void init() { 
-		factory = this;
-		
-	}
+//	@PostConstruct  
+//	public void init() { 
+//		factory = this;
+//		
+//	}
 	
 	public synchronized static void addService(String name,SmsService service){
-		if(factory.getServices().isEmpty()){
-			factory.setDefaultName(name);
+		if(services.isEmpty()){
+			defaultName=name;
 		}
-		factory.getServices().put(name, service);
+		services.put(name, service);
+		
 	}
 }
