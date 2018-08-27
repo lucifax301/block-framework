@@ -9,6 +9,20 @@ public class SmsConfig {
     // TODO 此处需要替换成开发者自己的AK(在阿里云访问控制台寻找)
     private String accessKeyId = "LTAIO2GWU3zgUrqK";
     private String accessKeySecret = "gX7xPLpu8WC8Zn8efHyWf6iXZIcorq";
+    private String smsSign = null;
+    
+    
+    
+	public String getSmsSign() {
+		return smsSign;
+	}
+
+
+	public void setSmsSign(String smsSign) {
+		this.smsSign = smsSign;
+	}
+
+
 	public String getProduct() {
 		return product;
 	}

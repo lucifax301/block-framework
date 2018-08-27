@@ -17,7 +17,6 @@ import com.block.framework.sms.SendSmsResult;
 import com.block.framework.sms.SmsService;
 import com.block.framework.sms.SmsServiceFactory;
 
-@Service
 public class AliSmsServiceImpl implements SmsService<String> {
 
 	@Autowired

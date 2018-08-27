@@ -18,6 +18,8 @@
 	<bean id="aliSmsConfig" class="com.block.framework.sms.alibaba.SmsConfig">
         <property name="accessKeyId" value="${sms.ali.accessKeyId}"/>
         <property name="accessKeySecret" value="${sms.ali.accessKeySecret}"/>
+        <property name="smsSign" value="${sms.ali.smsSign}"/>
+        
     </bean>
 	
 	<bean id="aliSmsService" class="com.block.framework.sms.alibaba.AliSmsServiceImpl"/>

@@ -42,16 +42,18 @@
 	
 	<bean id="aliSmsService" class="com.block.framework.sms.alibaba.AliSmsServiceImpl"/>
 	-->
+	<!--
 	<bean id="fileServiceFactory" class="com.block.framework.sms.SmsServiceFactory">
-		<!--  
+		  
 		<property name="defaultName" value="ali"></property>
 		<property name="services">
             <map>
                 <entry key="ali" value-ref="aliSmsService" />
             </map>
         </property>
-        -->
+        
     </bean>
+    -->
     
     <import resource="classpath*:spring-sms-ali-init.xml"/>
     <import resource="classpath*:spring-sms-tencent-init.xml"/>
