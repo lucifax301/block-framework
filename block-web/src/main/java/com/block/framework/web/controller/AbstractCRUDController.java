@@ -1,5 +1,7 @@
 package com.block.framework.web.controller;
 
+import java.lang.reflect.ParameterizedType;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -24,7 +26,14 @@ public abstract class AbstractCRUDController<T,S> extends BaseController {
 		this.serviceMediator = serviceMediator;
 	}
 
-	public abstract Class<S> getCls();
+	public Class<S> getCls(){
+		return getServiceParameterizedType();
+	}
+	
+	public Class<S> getServiceParameterizedType(){
+		ParameterizedType type = (ParameterizedType)(this.getClass().getGenericSuperclass());
+		return (Class<S>)type.getActualTypeArguments()[1];
+	}
 	
 	public ResultBean add(T model,HttpServletRequest request,HttpServletResponse response) {
 		return getService(getCls()).add(model);
@@ -49,7 +58,12 @@ public abstract class AbstractCRUDController<T,S> extends BaseController {
 	}
 	
 	public ResultBean get(T model,HttpServletRequest request,HttpServletResponse response) {
-		return this.buildResult(getService(getCls()).get(model));
+		return getService(getCls()).get(model);
+		//return (T)getService(getCls()).getOne(model);
+	}
+	
+	public ResultBean getOne(T model,HttpServletRequest request,HttpServletResponse response) {
+		return this.buildResult(getService(getCls()).getOne(model));
 		//return (T)getService(getCls()).getOne(model);
 	}
 	
