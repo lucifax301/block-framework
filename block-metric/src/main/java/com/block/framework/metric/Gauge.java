@@ -1,6 +1,6 @@
 package com.block.framework.metric;
 
-public interface Guage<T> extends Metric{
+public interface Gauge<T> extends Metric{
 
 	T getValue();
 }

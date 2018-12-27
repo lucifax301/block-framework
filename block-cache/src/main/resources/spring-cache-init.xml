@@ -17,7 +17,7 @@
 	
 	
 	
-	<bean id="rediscache" class="com.block.framework.pay.cache.impl.BlockRedisCache"/>
+	<bean id="rediscache" class="com.block.framework.cache.impl.BlockRedisCache"/>
 	
 	<bean id="blockCacheFactory" class="com.block.framework.cache.BlockCacheFactory">
 		<property name="defaultCache" value="redis"/>	

@@ -57,4 +57,15 @@ public class MetricCenter {
 	public static Counter counter(String name){
 		return new Counter(metricRegistry.counter(name));
 	}
+	
+	public static <T> void registerGauge(String name,final Gauge<T> gauge){
+		metricRegistry.register(name, new com.codahale.metrics.Gauge<T>(){
+
+			@Override
+			public T getValue() {
+				return gauge.getValue();
+			}
+			
+		});
+	}
 }
